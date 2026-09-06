@@ -1,10 +1,11 @@
-    var0 = "imagen donki kong"
-    var1 = "iamgen mario"
-    var2 = "imagen luiggi"
-    var3 = "imagen princesa"
-    var4 = "imagen caja" // aca podriamos aprovechar para introcudir un evento al juego, donde intervenga la caja
-    varHongo = "imagen del honguito"
-// esta es la construccion del dado, luego le asignaremos las imagenes a las variables! 
+    let var0 = '<img src="mario/donkeykong.png" alt="imagen donki kong" width="60" height="60"> '
+    let var1 = '<img src="mario/mario.png" alt="imagen mario" width="60" height="60">'
+    let var2 = '<img src="mario/luigi.png" alt="imagen luiggi" width="60" height="60">'
+    let var3 = '<img src="mario/daisy.png" alt="imagen princesa" width="60" height="60">'
+    let var4 = '<img src="mario/box.png" alt="imagen caja" width="60" height="60">'
+     // aca podriamos aprovechar para introcudir un evento al juego, donde intervenga la caja
+    let varHongo = '<img src="mario/goomba.png" alt="imagen del honguito" width="60" height="60">'
+
 const dado = [
     var0,
     var1, 
@@ -25,7 +26,8 @@ tirada.addEventListener ("click", () => {
 azar (dado,limite); 
 console.log(preseleccion);
 numeroTiradas++
-saltoLinea (contadorDadosPermaMesa, limite, numeroTiradas)
+saltoLinea (contadorDadosPermaMesa, limite, numeroTiradas);
+     mostrarDados(); 
 });
 
 let limite = 5;
@@ -40,6 +42,15 @@ function azar (dado,limite)  {
     }}
 } 
 
+//intentare mostrar los dados
+function mostrarDados () {
+document.querySelector("#dado1").innerHTML = preseleccion[0];
+document.querySelector("#dado2").innerHTML = preseleccion[1];
+document.querySelector("#dado3").innerHTML = preseleccion[2];
+document.querySelector("#dado4").innerHTML = preseleccion[3];
+document.querySelector("#dado5").innerHTML = preseleccion[4];
+}
+
 
 //usuario eligiendo que dados quedan en la mesa:
 const dado1 = document.getElementById("dado1");
@@ -47,6 +58,7 @@ const dado2 = document.getElementById("dado2");
 const dado3 = document.getElementById("dado3");
 const dado4 = document.getElementById("dado4");
 const dado5 = document.getElementById("dado5");
+
 
 // "encendido-apagado" de las selecciones
 let encendido1 = false;
@@ -71,8 +83,11 @@ dado1.addEventListener ("click", () => {
     contadorDadosPermaMesa ++;
     seleccion [0] = preseleccion [0];
         encendido1 = true 
-    } else {encendido1 = false;
+    } else {
+            console.log("El usuario des-seleccionó dado1");
+        encendido1 = false;
         contadorDadosPermaMesa--;
+        seleccion [0] = null;
     }
 });
 
@@ -80,9 +95,13 @@ dado2.addEventListener ("click", () => {
      if (encendido2 === false) {
     console.log("El usuario seleccionó dado2");
     contadorDadosPermaMesa ++;
-    seleccion [1] = preseleccion [1];}
-     else {encendido2 = false;
+    seleccion [1] = preseleccion [1];
+    encendido2 = true }
+     else {
+            console.log("El usuario des-seleccionó dado2");
+        encendido2 = false;
         contadorDadosPermaMesa--;
+        seleccion [1] = null;
      }
 });
 
@@ -90,9 +109,11 @@ dado3.addEventListener ("click", () => {
      if (encendido3 === false) {
     console.log("El usuario seleccionó dado3");
     contadorDadosPermaMesa ++;
-    seleccion [2] = preseleccion [2];}
+    seleccion [2] = preseleccion [2];
+encendido3 = true }
      else {encendido3 = false;
         contadorDadosPermaMesa--;
+        seleccion [2] = null;
      }
 });
 
@@ -100,9 +121,13 @@ dado4.addEventListener ("click", () => {
      if (encendido4 === false) {
         console.log("El usuario seleccionó dado4");
     contadorDadosPermaMesa ++;
-    seleccion [3] = preseleccion [3];}
-     else {encendido4 = false;
-        contadorDadosPermaMesa--
+    seleccion [3] = preseleccion [3];
+encendido4 = true }
+     else {
+                console.log("El usuario des-seleccionó dado4");
+                encendido4 = false;
+        contadorDadosPermaMesa--;
+        seleccion [3] = null;
      }
 });
 
@@ -110,9 +135,11 @@ dado5.addEventListener ("click", () => {
      if (encendido5 === false) {
     console.log("El usuario seleccionó dado5");
     contadorDadosPermaMesa ++;
-    seleccion [4] = preseleccion [4];}
+    seleccion [4] = preseleccion [4];
+encendido5 = true }
      else {encendido5 = false;
         contadorDadosPermaMesa--;
+        seleccion [4] = null;
      }
 });
 
@@ -137,3 +164,4 @@ encendido5 = false;
 console.log(linea);
 n++
 } }
+
