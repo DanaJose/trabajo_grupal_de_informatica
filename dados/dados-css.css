@@ -1,0 +1,22 @@
+/*#tirada {}  aqui para ponerle onda al boton de tirada  */
+
+
+.dados {
+    display: flex;
+    background-color: black;
+    height: 80px;
+    align-items: center;
+    gap: 12px; 
+    justify-content: center;
+    
+}
+
+.dados div {
+    height: 60px;
+    width: 60px;
+background-color: white;
+padding: 3px;
+
+}
+
+/*#tablero {}  luego se puede trabajar el tablero  */

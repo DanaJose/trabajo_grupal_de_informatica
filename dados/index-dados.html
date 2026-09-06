@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Juego de Dados!</title>
+    <link href="dados-css.css" rel="stylesheet" >
 </head>
 <body>
     
@@ -12,15 +13,26 @@
 
 
 
-//luego trabajemos esto con el css, la idea de la sección es que cada DIV muestre un dado 
-<section>
-<div ></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
+<!--luego trabajemos esto con el css, la idea de la sección es que cada DIV muestre un dado!--> 
+<section class="dados">
+<div id="dado1" ></div>
+<div id="dado2"></div>
+<div id="dado3"></div>
+<div id="dado4"></div>
+<div id="dado5"></div>
 </section>
+
+<!--cada articulo de esta seccion seria una linea en el tablero;
+si no puede resolverse asi podriamos agregar 5 divs a cada articulo.!--> 
+<section id="tablero">
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+    <article></article>
+
+</section>
+
 <script src="scriptDados.js"></script>
 </body>
 </html>
