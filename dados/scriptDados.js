@@ -51,6 +51,44 @@ document.querySelector("#dado4").innerHTML = preseleccion[3];
 document.querySelector("#dado5").innerHTML = preseleccion[4];
 }
 
+//usuario apretando flechitas
+const intercambio1 = document.getElementById("intercambio1");
+const intercambio2 = document.getElementById("intercambio2");
+const intercambio3 = document.getElementById("intercambio3");
+const intercambio4 = document.getElementById("intercambio4");
+
+
+intercambio1.addEventListener ("click", () => {
+    let guarda0 = preseleccion [0];
+    let guarda1 = preseleccion [1];
+    preseleccion [0] = guarda1;
+    preseleccion [1] = guarda0;
+    mostrarDados();
+});
+
+intercambio2.addEventListener ("click", () => {
+    let guarda0 = preseleccion [1];
+    let guarda1 = preseleccion [2];
+    preseleccion [1] = guarda1;
+    preseleccion [2] = guarda0;
+    mostrarDados();
+});
+
+intercambio3.addEventListener ("click", () => {
+    let guarda0 = preseleccion [2];
+    let guarda1 = preseleccion [3];
+    preseleccion [2] = guarda1;
+    preseleccion [3] = guarda0;
+    mostrarDados();
+});
+
+intercambio4.addEventListener ("click", () => {
+    let guarda0 = preseleccion [3];
+    let guarda1 = preseleccion [4];
+    preseleccion [3] = guarda1;
+    preseleccion [4] = guarda0;
+    mostrarDados();
+});
 
 //usuario eligiendo que dados quedan en la mesa:
 const dado1 = document.getElementById("dado1");
