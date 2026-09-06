@@ -19,4 +19,27 @@ padding: 3px;
 
 }
 
-/*#tablero {}  luego se puede trabajar el tablero  */
+.tablero {
+        display: flex;
+        flex-direction: column;
+    background-color: black;
+    height: 450px;
+    align-items: center;
+    gap: 12px; 
+    justify-content: center;
+}
+
+.tablero article {
+    display: inline-flex;
+     height: 60px;
+    width: 400px;
+background-color: white;
+padding: 3px;   
+    align-items: center;
+    gap: 12px; 
+}
+
+.tablero article div {
+    display: inline-flex;
+    flex-direction: row;
+}

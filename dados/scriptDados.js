@@ -25,7 +25,7 @@ tirada.addEventListener ("click", () => {
     console.log("El usuario tiró los dados");
 azar (dado,limite); 
 console.log(preseleccion);
-numeroTiradas++
+numeroTiradas++;
 saltoLinea (contadorDadosPermaMesa, limite, numeroTiradas);
      mostrarDados(); 
 });
@@ -151,9 +151,11 @@ if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
    numeroTiradas = 0;
    contadorDadosPermaMesa = 0;
 
-   linea [n] = seleccion;
+   linea [n] = preseleccion;
 
    cuadricula.push (linea);
+
+   lineaCae();
 
 encendido1 = false;
 encendido2 = false;
@@ -165,3 +167,8 @@ console.log(linea);
 n++
 } }
 
+function lineaCae () {
+let relleno = "";
+relleno += '<div>' + linea[n] +   '</div>';
+let altura = '#linea'+ n;
+document.querySelector(altura).innerHTML = relleno;}
