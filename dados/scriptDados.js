@@ -22,9 +22,8 @@ let numeroTiradas = 0;
 const tirada = document.getElementById("tirada");
 
 tirada.addEventListener ("click", () => {
-    console.log("El usuario tiró los dados");
+    // dado y limite son variables globales ¿las puedo sacar sin jodder el codigo?  
 azar (dado,limite); 
-console.log(preseleccion);
 numeroTiradas++;
 saltoLinea ();
      mostrarDados(); 
@@ -33,7 +32,7 @@ saltoLinea ();
 let limite = 5;
 let contadorDadosPermaMesa = 0;
 let seleccion = [null,null,null,null,null];
-
+// idem linea 25
 function azar (dado,limite)  {
     for (let i=0; i<limite; i++) {
         if (seleccion[i]==null){
@@ -194,7 +193,7 @@ if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
    cuadricula.push (linea);
 
    lineaCae();
-
+    tresEnLinea();
 
 preseleccion = [null,null,null,null,null];
 seleccion = [null,null,null,null,null];
@@ -214,3 +213,44 @@ let relleno = "";
 relleno += '<div>' + linea[n] +   '</div>';
 let altura = '#linea'+ n;
 document.querySelector(altura).innerHTML = relleno;}
+
+
+// esta funcion analizaria los valores de la cuadricula y la idea es que se eliminen al haber tres en linea
+// opcion 1) todo el sector ; opcion dos: solo los que estan en linea
+
+//Declaración de IA: GPT me ayudó a plantear la estructura correcta para cuadricula[fila][columna]
+// venia intentando cuadricula [i,j] y me daba undefined ; parece que al haber hecho el push la cuadricula queda [cuadricula[linea[posicion]]]
+function tresEnLinea () {
+    let evaluador1 = "";
+    let evaluador2 = "";
+    let evaluador3 = "";
+    let evaluador4 = "";
+    let evaluador5 = "";
+    let evaluador6 = "";
+    //recorro la cuadricula
+    for (let i=0; i<linea.length; i++) {
+        for (let j=0; j<limite-2; j++){
+            evaluador1 = cuadricula [0][i][j];
+            evaluador2 = cuadricula [0][i][j+1];
+            evaluador3 = cuadricula [0][i][j+2];
+            
+            // tres en linea horizontal
+            if (evaluador1 === evaluador2 && evaluador2=== evaluador3) {
+                console.log ("borrar horizontal");
+            }
+            }
+            }
+            
+            // tres en linea vertical
+        for (let l=0; l< linea.length - 2; l++){
+            console.log("tercera line")
+             for (let k=0; k<limite;k++){
+               evaluador4 = cuadricula [0][l][k]
+                evaluador5 = cuadricula [0][l+1][k]
+                evaluador6 = cuadricula [0][l+2][k] 
+                if (evaluador4 === evaluador5 && evaluador5=== evaluador6) {
+                console.log ("borrar vertical");
+            }
+            }
+
+}}
