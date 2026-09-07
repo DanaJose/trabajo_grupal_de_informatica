@@ -26,7 +26,7 @@ tirada.addEventListener ("click", () => {
 azar (dado,limite); 
 console.log(preseleccion);
 numeroTiradas++;
-saltoLinea (contadorDadosPermaMesa, limite, numeroTiradas);
+saltoLinea ();
      mostrarDados(); 
 });
 
@@ -195,13 +195,17 @@ if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
 
    lineaCae();
 
+
+preseleccion = [null,null,null,null,null];
+seleccion = [null,null,null,null,null];
+console.log ("la cuadricula es", cuadricula)
 encendido1 = false;
 encendido2 = false;
 encendido3 = false;
 encendido4 = false;
 encendido5 = false;
 
-console.log(linea);
+mostrarDados();
 n++
 } }
 
