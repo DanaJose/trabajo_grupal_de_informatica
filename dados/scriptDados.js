@@ -104,6 +104,11 @@ let encendido3 = false;
 let encendido4 = false;
 let encendido5 = false;
 
+//bordes para señalar seleccion
+const dadoSeleccionado = function(borDado) { 
+    borDado.classList.toggle('dado-seleccionado'); 
+};
+
 // sea una buena idea armar un for? para cargar un array que vaya actualizando os valhoras das lineas!
 let cuadricula = [];
 
@@ -120,11 +125,13 @@ dado1.addEventListener ("click", () => {
     contadorDadosPermaMesa ++;
     seleccion [0] = preseleccion [0];
         encendido1 = true 
+        dadoSeleccionado (dado1);
     } else {
             console.log("El usuario des-seleccionó dado1");
         encendido1 = false;
         contadorDadosPermaMesa--;
         seleccion [0] = null;
+            dadoSeleccionado (dado1);
     }
 });
 
@@ -133,12 +140,14 @@ dado2.addEventListener ("click", () => {
     console.log("El usuario seleccionó dado2");
     contadorDadosPermaMesa ++;
     seleccion [1] = preseleccion [1];
-    encendido2 = true }
+    encendido2 = true 
+    dadoSeleccionado (dado2);}
      else {
             console.log("El usuario des-seleccionó dado2");
         encendido2 = false;
         contadorDadosPermaMesa--;
         seleccion [1] = null;
+        dadoSeleccionado (dado2);
      }
 });
 
@@ -147,10 +156,12 @@ dado3.addEventListener ("click", () => {
     console.log("El usuario seleccionó dado3");
     contadorDadosPermaMesa ++;
     seleccion [2] = preseleccion [2];
-encendido3 = true }
+encendido3 = true 
+        dadoSeleccionado (dado3);}
      else {encendido3 = false;
         contadorDadosPermaMesa--;
         seleccion [2] = null;
+        dadoSeleccionado (dado3);
      }
 });
 
@@ -159,12 +170,14 @@ dado4.addEventListener ("click", () => {
         console.log("El usuario seleccionó dado4");
     contadorDadosPermaMesa ++;
     seleccion [3] = preseleccion [3];
-encendido4 = true }
+encendido4 = true
+dadoSeleccionado (dado4); }
      else {
                 console.log("El usuario des-seleccionó dado4");
                 encendido4 = false;
         contadorDadosPermaMesa--;
         seleccion [3] = null;
+        dadoSeleccionado (dado4);
      }
 });
 
@@ -173,10 +186,12 @@ dado5.addEventListener ("click", () => {
     console.log("El usuario seleccionó dado5");
     contadorDadosPermaMesa ++;
     seleccion [4] = preseleccion [4];
-encendido5 = true }
+encendido5 = true
+dadoSeleccionado (dado5); }
      else {encendido5 = false;
         contadorDadosPermaMesa--;
         seleccion [4] = null;
+        dadoSeleccionado (dado5);
      }
 });
 
@@ -194,6 +209,14 @@ if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
 
    lineaCae();
     tresEnLinea();
+
+        //des-selecciono dados
+    //declaracion IA: Gemini me ampio las herramientas posibles del toggle
+    dado1.classList.toggle("dado-seleccionado", false)
+    dado2.classList.toggle("dado-seleccionado", false)
+    dado3.classList.toggle("dado-seleccionado", false)
+    dado4.classList.toggle("dado-seleccionado", false)
+    dado5.classList.toggle("dado-seleccionado", false)
 
 preseleccion = [null,null,null,null,null];
 seleccion = [null,null,null,null,null];
