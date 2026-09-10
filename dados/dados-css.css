@@ -43,3 +43,7 @@ padding: 3px;
     display: inline-flex;
     flex-direction: row;
 }
+
+.dado-seleccionado {
+            border: 3px solid red;
+}
