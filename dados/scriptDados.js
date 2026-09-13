@@ -204,8 +204,8 @@ if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
    contadorDadosPermaMesa = 0;
 
    linea [n] = preseleccion;
-
-   cuadricula.push (linea);
+//intentare dejar de mostrar desde linea para mostrar desde cuadricula
+   cuadricula.push (preseleccion);
 
    lineaCae();
     tresEnLinea();
@@ -229,14 +229,21 @@ encendido5 = false;
 
 mostrarDados();
 n++
+huecos ();
 } }
 
 function lineaCae () {
 let relleno = "";
-relleno += '<div>' + linea[n] +   '</div>';
+    for (let i = 0; i < cuadricula[n].length; i++) {
+
+        if (cuadricula[n][i] != null) {
+            relleno += '<div>' + cuadricula[n][i] + '</div>';
+        } else {
+            relleno += '<div></div>';
+        }
 let altura = '#linea'+ n;
 document.querySelector(altura).innerHTML = relleno;}
-
+}
 
 // esta funcion analizaria los valores de la cuadricula y la idea es que se eliminen al haber tres en linea
 // opcion 1) todo el sector ; opcion dos: solo los que estan en linea
@@ -250,16 +257,32 @@ function tresEnLinea () {
     let evaluador4 = "";
     let evaluador5 = "";
     let evaluador6 = "";
+    let ctd= 0;
+    let sentido = "";
     //recorro la cuadricula
-    for (let i=0; i<linea.length; i++) {
-        for (let j=0; j<limite-2; j++){
-            evaluador1 = cuadricula [0][i][j];
-            evaluador2 = cuadricula [0][i][j+1];
-            evaluador3 = cuadricula [0][i][j+2];
+    for (let i=0; i<cuadricula.length; i++) {
+        for (let j=0; j<cuadricula.length-2; j++){
+            evaluador1 = cuadricula [i][j];
+            evaluador2 = cuadricula [i][j+1];
+            evaluador3 = cuadricula [i][j+2];
             
             // tres en linea horizontal
             if (evaluador1 === evaluador2 && evaluador2=== evaluador3) {
                 console.log ("borrar horizontal");
+                sentido = "horizontal";
+              /*  let eva4 = cuadricula [i][j+3];
+                let eva5 = cuadricula [i][j+4];
+                if (evaluador3 === eva4 && evaluador3 === eva5) {
+                    console.log ("cinco posiciones")
+                   ctd=5;
+                } else if (evaluador3 === eva4) {
+                    console.log ("cuatro posiciones");
+                   ctd=4;
+                } else {}*/
+                    console.log ("tres posiciones")
+                     ctd = 3;
+                
+borrarTCoC (sentido,ctd,i,j)
             }
             }
             }
@@ -268,12 +291,64 @@ function tresEnLinea () {
         for (let l=0; l< linea.length - 2; l++){
             console.log("tercera line")
              for (let k=0; k<limite;k++){
-               evaluador4 = cuadricula [0][l][k]
-                evaluador5 = cuadricula [0][l+1][k]
-                evaluador6 = cuadricula [0][l+2][k] 
+               evaluador4 = cuadricula [l][k];
+                evaluador5 = cuadricula [l+1][k];
+                evaluador6 = cuadricula [l+2][k];
                 if (evaluador4 === evaluador5 && evaluador5=== evaluador6) {
                 console.log ("borrar vertical");
+                sentido = "vertical";
+                /*let eva7 = cuadricula [l+3][k];
+                let eva8 =  cuadricula [l+4][k];
+                if (evaluador4 === eva7 && evaluador4 === eva8) {
+                    console.log ("cinco posiciones")
+                     ctd=5;
+                } else if (evaluador4 === eva7) {
+                    console.log ("cuatro posiciones")
+                     ctd = 4;
+                } else {}*/
+                    console.log ("tres posiciones")
+                     ctd =3;
+                
+                borrarTCoC (sentido,ctd,l,k)
             }
             }
-
 }}
+// ahora, si encontramos tres, cuatro o cinco en linea deberiamos borrar valores de la cuadrilla, y reempazarlos por los "que caen de arriba". hay que modificar el codigo S:
+//necesitamos un return del if, tanto en horizontal como en vertical
+function borrarTCoC (sentido,ctd,fila,columna) {
+//borramos n objetos segun cuantos elementos en linea haya
+if (sentido==="horizontal"){
+for (let h=0; h<ctd; h++){
+    cuadricula[fila][columna+h] = null;
+  //  caeLinea(fila,columna,h)
+}} else if (sentido === "vertical"){
+for (let h=0; h<ctd; h++){
+    cuadricula[fila+h][columna] = null;
+  //  caeLinea(fila,columna,h)
+}}
+console.log(cuadricula)
+}/*
+function caeLinea (fila,columna) {
+    for (let g=0; g<5; g++)
+    if (cuadricula[fila+1][columna+g] != null){
+        cuadricula[fila][columna+g] = cuadricula[fila+1][columna+g];
+        cuadricula[fila+1][columna+g] = null; 
+    }
+}*/
+function huecos () {
+if (n===5) {
+    for (let i=0;i<=4;i++){
+    n=i;
+    rellenarHuecos();
+    lineaCae();}
+}}
+function rellenarHuecos(){
+    for (let i=0; i<=4;i++){
+        for (let j=4; j>0;j--){
+            if (cuadricula[j-1][i]===null && cuadricula[j][i] != null){
+                cuadricula[j-1][i]=cuadricula[i][j];
+                cuadricula[j][i]=null;
+            }
+        }
+    }
+}

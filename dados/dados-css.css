@@ -42,6 +42,8 @@ padding: 3px;
 .tablero article div {
     display: inline-flex;
     flex-direction: row;
+        height: 60px;
+    width: 60px;
 }
 
 .dado-seleccionado {
