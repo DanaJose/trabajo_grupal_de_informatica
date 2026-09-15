@@ -1,4 +1,3 @@
-
 let resultado = document.querySelector("#resultado");
 let puntajeFinal = document.querySelector("#puntajeFinal");
 let reiniciar = document.querySelector("#reiniciar");
@@ -10,52 +9,82 @@ let puntaje = 0;
 let tiempo = 20;
 let mostrarTiempo = document.querySelector("#tiempo");
 
-let numeroBuscado = 7;
 let ronda = 1;
 
 let contenedorCartas = document.querySelector("#cartas");
 
-let numerosRonda1 = [4, 9, 1, 7, 3, 10, 5, 2, 8, 6];
 
-let numerosRonda2 = [12, 4, 19, 7, 2, 15, 9, 1, 18, 6, 13, 10, 5, 20, 3, 16, 8, 14, 11, 17];
+// CARTAS DE LA RONDA 1
+let cartasRonda1 = [
+    4,
+    9,
+    "estrella",
+    "princesa",
+    3,
+    "hongo",
+    5,
+    2,
+    8,
+    6
+];
 
 
-function crearCartas(numeros) {
+// CARTAS DE LA RONDA 2
+let cartasRonda2 = [
+    2,
+    4,
+    9,
+    "estrella",
+    6,
+    3,
+    "hongo",
+    8,
+    10,
+    "mario",
+    5,
+    2,
+    4,
+    "luna",
+    9,
+    6
+];
 
-    numeros.forEach(function(numero) {
+
+function crearCartas(cartas) {
+
+    cartas.forEach(function(numero) {
 
         let carta = document.createElement("button");
 
-        carta.innerText = "?";
+        let imagen = document.createElement("img");
+
+        // La carta empieza mostrando el reverso
+        imagen.src = "img/reverso.png";
+
+        carta.appendChild(imagen);
+
 
         carta.addEventListener("click", function() {
 
-            carta.innerText = numero;
-
-            if (ronda == 1 && numero == 5) {
-                carta.innerText = "⭐";
-                puntaje = puntaje + 10;
-
-                alert("¡Felicidades! Sumaste 10 puntos.");
+            // Mostramos la imagen correspondiente
+            if (numero == "luna") {
+                imagen.src = "img/luna.jpg";
+            } else {
+                imagen.src = "img/" + numero + ".png";
             }
 
-            if (ronda == 2 && numero == 5) {
-                carta.innerText = "⭐";
+
+            // ESTRELLA
+            if (numero == "estrella") {
+
                 puntaje = puntaje + 10;
 
                 alert("¡Encontraste una estrella! Sumaste 10 puntos.");
             }
 
-            if (ronda == 2 && numero == 15) {
-                carta.innerText = "🪙";
-                puntaje = puntaje + 10;
 
-                alert("¡Encontraste otro premio! Sumaste 10 puntos.");
-            }
-
-            if (ronda == 2 && numero == 12) {
-
-                carta.innerText = "🍄";
+            // HONGO
+            if (numero == "hongo") {
 
                 clearInterval(cronometro);
 
@@ -63,79 +92,101 @@ function crearCartas(numeros) {
 
                 resultado.innerText = "FIN DEL JUEGO";
 
-                puntajeFinal.innerText = "Tu puntaje es " + puntaje + " puntos";
+                puntajeFinal.innerText =
+                    "Tu puntaje es " + puntaje + " puntos";
 
                 reiniciar.style.display = "block";
             }
 
-            if (numero == numeroBuscado) {
 
-                if (ronda == 1) {
+            // LUNA
+            if (numero == "luna") {
 
-                    alert("¡Bien hecho, nivel desbloqueado!");
+                puntaje = puntaje + 10;
 
-                    ronda = 2;
-                    numeroBuscado = 2;
+                alert("¡Encontraste la luna! Sumaste 10 puntos.");
+            }
 
-                    mensaje.innerText = "Ahora busca el número 2";
 
-                    contenedorCartas.innerHTML = "";
+            // PRINCESA
+            if (ronda == 1 && numero == "princesa") {
 
-                    crearCartas(numerosRonda2);
+                alert("¡Encontraste a la princesa! Ahora busca a Mario.");
 
-                    clearInterval(cronometro);
+                ronda = 2;
 
-                    tiempo = 10;
+                mensaje.innerText = "Ahora busca a Mario";
+
+                contenedorCartas.innerHTML = "";
+
+                crearCartas(cartasRonda2);
+
+                clearInterval(cronometro);
+
+                tiempo = 15;
+
+                mostrarTiempo.innerText = tiempo;
+
+
+                cronometro = setInterval(function() {
+
+                    tiempo--;
+
                     mostrarTiempo.innerText = tiempo;
 
-                    cronometro = setInterval(function() {
 
-                        tiempo--;
-                        mostrarTiempo.innerText = tiempo;
+                    if (tiempo == 0) {
 
-                        if (tiempo == 0) {
+                        clearInterval(cronometro);
 
-                            clearInterval(cronometro);
+                        alert("¡Oh no! Se acabó el tiempo.");
 
-                            alert("¡Oh no! Se acabó el tiempo.");
+                        resultado.innerText = "FIN DE LA RONDA";
 
-                            resultado.innerText = "FIN DE LA RONDA";
+                        puntajeFinal.innerText =
+                            "Puntaje: " + puntaje + " puntos";
 
-                            puntajeFinal.innerText = "Puntaje: " + puntaje + " puntos";
+                        reiniciar.style.display = "block";
+                    }
 
-                            reiniciar.style.display = "block";
-                        }
+                }, 1000);
+            }
 
-                    }, 1000);
 
-                } else {
+            // MARIO
+            if (ronda == 2 && numero == "mario") {
 
-                    clearInterval(cronometro);
+                clearInterval(cronometro);
 
-                    alert("¡Lo hiciste perfecto!");
+                alert("¡Encontraste a Mario! ¡Ahora puede estar junto a la princesa! ❤️");
 
-                    resultado.innerText = "FIN DEL JUEGO";
+                resultado.innerText = "¡FIN DEL JUEGO!";
 
-                    puntajeFinal.innerText = "Tu puntaje es " + puntaje + " puntos";
+                puntajeFinal.innerText =
+                    "Tu puntaje es " + puntaje + " puntos";
 
-                    reiniciar.style.display = "block";
-                }
+                reiniciar.style.display = "block";
             }
 
         });
+
 
         contenedorCartas.appendChild(carta);
     });
 }
 
 
-crearCartas(numerosRonda1);
+// EMPEZAMOS LA RONDA 1
+crearCartas(cartasRonda1);
 
 
+// CRONÓMETRO DE LA PRIMERA RONDA
 let cronometro = setInterval(function() {
 
     tiempo--;
+
     mostrarTiempo.innerText = tiempo;
+
 
     if (tiempo == 0) {
 
@@ -145,7 +196,8 @@ let cronometro = setInterval(function() {
 
         resultado.innerText = "FIN DE LA RONDA";
 
-        puntajeFinal.innerText = "Puntaje: " + puntaje + " puntos";
+        puntajeFinal.innerText =
+            "Puntaje: " + puntaje + " puntos";
 
         reiniciar.style.display = "block";
     }
@@ -153,11 +205,11 @@ let cronometro = setInterval(function() {
 }, 1000);
 
 
+// BOTÓN REINICIAR
 reiniciar.addEventListener("click", function() {
 
     location.reload();
 
 });
-
 
 
