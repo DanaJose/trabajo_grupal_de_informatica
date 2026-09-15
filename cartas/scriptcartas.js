@@ -1,4 +1,4 @@
-```js
+
 let resultado = document.querySelector("#resultado");
 let puntajeFinal = document.querySelector("#puntajeFinal");
 let reiniciar = document.querySelector("#reiniciar");
@@ -32,50 +32,94 @@ function crearCartas(numeros) {
 
             carta.innerText = numero;
 
-            if (numero == 5) {
+            if (ronda == 1 && numero == 5) {
                 carta.innerText = "⭐";
                 puntaje = puntaje + 10;
 
                 alert("¡Felicidades! Sumaste 10 puntos.");
             }
 
-            if (numero == numeroBuscado) {
+            if (ronda == 2 && numero == 5) {
+                carta.innerText = "⭐";
+                puntaje = puntaje + 10;
 
-                alert("¡Bien hecho, nivel desbloqueado!");
+                alert("¡Encontraste una estrella! Sumaste 10 puntos.");
+            }
 
-                ronda = 2;
-                numeroBuscado = 2;
+            if (ronda == 2 && numero == 15) {
+                carta.innerText = "🪙";
+                puntaje = puntaje + 10;
 
-                mensaje.innerText = "Ahora busca el número 2";
+                alert("¡Encontraste otro premio! Sumaste 10 puntos.");
+            }
 
-                contenedorCartas.innerHTML = "";
+            if (ronda == 2 && numero == 12) {
 
-                crearCartas(numerosRonda2);
+                carta.innerText = "🍄";
 
                 clearInterval(cronometro);
 
-                tiempo = 10;
-                mostrarTiempo.innerText = tiempo;
+                alert("¡Oh no! Elegiste el hongo y perdiste.");
 
-                cronometro = setInterval(function() {
+                resultado.innerText = "FIN DEL JUEGO";
 
-                    tiempo--;
+                puntajeFinal.innerText = "Tu puntaje es " + puntaje + " puntos";
+
+                reiniciar.style.display = "block";
+            }
+
+            if (numero == numeroBuscado) {
+
+                if (ronda == 1) {
+
+                    alert("¡Bien hecho, nivel desbloqueado!");
+
+                    ronda = 2;
+                    numeroBuscado = 2;
+
+                    mensaje.innerText = "Ahora busca el número 2";
+
+                    contenedorCartas.innerHTML = "";
+
+                    crearCartas(numerosRonda2);
+
+                    clearInterval(cronometro);
+
+                    tiempo = 10;
                     mostrarTiempo.innerText = tiempo;
 
-                    if (tiempo == 0) {
+                    cronometro = setInterval(function() {
 
-                        clearInterval(cronometro);
+                        tiempo--;
+                        mostrarTiempo.innerText = tiempo;
 
-                        alert("¡Oh no! Se acabó el tiempo.");
+                        if (tiempo == 0) {
 
-                        resultado.innerText = "FIN DE LA RONDA";
+                            clearInterval(cronometro);
 
-                        puntajeFinal.innerText = "Puntaje: " + puntaje + " puntos";
+                            alert("¡Oh no! Se acabó el tiempo.");
 
-                        reiniciar.style.display = "block";
-                    }
+                            resultado.innerText = "FIN DE LA RONDA";
 
-                }, 1000);
+                            puntajeFinal.innerText = "Puntaje: " + puntaje + " puntos";
+
+                            reiniciar.style.display = "block";
+                        }
+
+                    }, 1000);
+
+                } else {
+
+                    clearInterval(cronometro);
+
+                    alert("¡Lo hiciste perfecto!");
+
+                    resultado.innerText = "FIN DEL JUEGO";
+
+                    puntajeFinal.innerText = "Tu puntaje es " + puntaje + " puntos";
+
+                    reiniciar.style.display = "block";
+                }
             }
 
         });
@@ -113,4 +157,7 @@ reiniciar.addEventListener("click", function() {
 
     location.reload();
 
-})
+});
+
+
+
