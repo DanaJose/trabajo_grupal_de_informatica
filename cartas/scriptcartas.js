@@ -68,14 +68,14 @@ function crearCartas(cartas) {
 
             // Mostramos la imagen correspondiente
             if (numero == "luna") {
-                imagen.src = "img/luna.jpg";
+                imagen.src = "img/luna.png";
             } else {
                 imagen.src = "img/" + numero + ".png";
             }
 
 
             // ESTRELLA
-            if (numero == "estrella") {
+            if (numero == "estrella.png") {
 
                 puntaje = puntaje + 10;
 
@@ -84,7 +84,7 @@ function crearCartas(cartas) {
 
 
             // HONGO
-            if (numero == "hongo") {
+            if (numero == "hongo.png") {
 
                 clearInterval(cronometro);
 
@@ -100,7 +100,7 @@ function crearCartas(cartas) {
 
 
             // LUNA
-            if (numero == "luna") {
+            if (numero == "luna.png") {
 
                 puntaje = puntaje + 10;
 
@@ -111,7 +111,7 @@ function crearCartas(cartas) {
             // PRINCESA
             if (ronda == 1 && numero == "princesa") {
 
-                alert("¡Encontraste a la princesa! Ahora busca a Mario.");
+                alert("¡Encontraste a la princesa! desbloqueaste la segunda ronda.");
 
                 ronda = 2;
 
@@ -123,7 +123,7 @@ function crearCartas(cartas) {
 
                 clearInterval(cronometro);
 
-                tiempo = 15;
+                tiempo = 10;
 
                 mostrarTiempo.innerText = tiempo;
 
@@ -154,7 +154,7 @@ function crearCartas(cartas) {
 
 
             // MARIO
-            if (ronda == 2 && numero == "mario") {
+            if (ronda == 2 && numero == "mario.png") {
 
                 clearInterval(cronometro);
 
@@ -176,11 +176,11 @@ function crearCartas(cartas) {
 }
 
 
-// EMPEZAMOS LA RONDA 1
+// EMPieza LA RONDA 1
 crearCartas(cartasRonda1);
 
 
-// CRONÓMETRO DE LA PRIMERA RONDA
+// CRONÓMETRO DE 1ra ronda
 let cronometro = setInterval(function() {
 
     tiempo--;
