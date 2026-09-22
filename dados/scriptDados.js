@@ -1,354 +1,509 @@
-    let var0 = '<img src="mario/donkeykong.png" alt="imagen donki kong" width="60" height="60"> '
-    let var1 = '<img src="mario/mario.png" alt="imagen mario" width="60" height="60">'
-    let var2 = '<img src="mario/luigi.png" alt="imagen luiggi" width="60" height="60">'
-    let var3 = '<img src="mario/daisy.png" alt="imagen princesa" width="60" height="60">'
-    let var4 = '<img src="mario/box.png" alt="imagen caja" width="60" height="60">'
-     // aca podriamos aprovechar para introcudir un evento al juego, donde intervenga la caja
-    let varHongo = '<img src="mario/goomba.png" alt="imagen del honguito" width="60" height="60">'
+// ============================================================
+// 1. IMÁGENES / CARAS DEL DADO
+// ============================================================
 
 const dado = [
-    var0,
-    var1, 
-    var2,
-    var3,
-    var4,
-    varHongo
-                ];
-//estos seran os valhores que o usuario vaya eligiendo
-let preseleccion = [];
+    '<img src="mario/donkeykong.png" alt="imagen Donkey Kong" width="60" height="60">',
+    '<img src="mario/mario.png" alt="imagen Mario" width="60" height="60">',
+    '<img src="mario/luigi.png" alt="imagen Luigi" width="60" height="60">',
+    '<img src="mario/daisy.png" alt="imagen Daisy" width="60" height="60">',
+    '<img src="mario/box.png" alt="imagen caja" width="60" height="60">',
+    '<img src="mario/goomba.png" alt="imagen Goomba" width="60" height="60">'
+];
+
+
+// ============================================================
+// 2. ESTADO DEL JUEGO
+// ============================================================
+
+const limite = 5;
+
+// Lo que muestran actualmente los cinco dados
+let dadosActuales = [null, null, null, null, null];
+
+// Qué dados están seleccionados/bloqueados
+// true = seleccionado
+// false = libre
+let seleccionados = [false, false, false, false, false];
+
+// Cantidad de dados que quedaron seleccionados
+let contadorDadosMesa = 0;
+
+// Cantidad de tiradas realizadas
 let numeroTiradas = 0;
 
-//aqui "tirada" es el nombre del boton y al accionarlo se ejecuta la funcion
-const tirada = document.getElementById("tirada");
-
-tirada.addEventListener ("click", () => {
-    // dado y limite son variables globales ¿las puedo sacar sin jodder el codigo?  
-azar (dado,limite); 
-numeroTiradas++;
-saltoLinea ();
-     mostrarDados(); 
-});
-
-let limite = 5;
-let contadorDadosPermaMesa = 0;
-let seleccion = [null,null,null,null,null];
-// idem linea 25
-function azar (dado,limite)  {
-    for (let i=0; i<limite; i++) {
-        if (seleccion[i]==null){
-      let valorAleatorio = dado[Math.floor(Math.random() * dado.length)];  
-     preseleccion [i] = valorAleatorio;
-    }}
-} 
-
-//intentare mostrar los dados
-function mostrarDados () {
-document.querySelector("#dado1").innerHTML = preseleccion[0];
-document.querySelector("#dado2").innerHTML = preseleccion[1];
-document.querySelector("#dado3").innerHTML = preseleccion[2];
-document.querySelector("#dado4").innerHTML = preseleccion[3];
-document.querySelector("#dado5").innerHTML = preseleccion[4];
-}
-
-//usuario apretando flechitas
-const intercambio1 = document.getElementById("intercambio1");
-const intercambio2 = document.getElementById("intercambio2");
-const intercambio3 = document.getElementById("intercambio3");
-const intercambio4 = document.getElementById("intercambio4");
-
-
-intercambio1.addEventListener ("click", () => {
-    let guarda0 = preseleccion [0];
-    let guarda1 = preseleccion [1];
-    preseleccion [0] = guarda1;
-    preseleccion [1] = guarda0;
-    mostrarDados();
-});
-
-intercambio2.addEventListener ("click", () => {
-    let guarda0 = preseleccion [1];
-    let guarda1 = preseleccion [2];
-    preseleccion [1] = guarda1;
-    preseleccion [2] = guarda0;
-    mostrarDados();
-});
-
-intercambio3.addEventListener ("click", () => {
-    let guarda0 = preseleccion [2];
-    let guarda1 = preseleccion [3];
-    preseleccion [2] = guarda1;
-    preseleccion [3] = guarda0;
-    mostrarDados();
-});
-
-intercambio4.addEventListener ("click", () => {
-    let guarda0 = preseleccion [3];
-    let guarda1 = preseleccion [4];
-    preseleccion [3] = guarda1;
-    preseleccion [4] = guarda0;
-    mostrarDados();
-});
-
-//usuario eligiendo que dados quedan en la mesa:
-const dado1 = document.getElementById("dado1");
-const dado2 = document.getElementById("dado2");
-const dado3 = document.getElementById("dado3");
-const dado4 = document.getElementById("dado4");
-const dado5 = document.getElementById("dado5");
-
-
-// "encendido-apagado" de las selecciones
-let encendido1 = false;
-let encendido2 = false;
-let encendido3 = false;
-let encendido4 = false;
-let encendido5 = false;
-
-//bordes para señalar seleccion
-const dadoSeleccionado = function(borDado) { 
-    borDado.classList.toggle('dado-seleccionado'); 
-};
-
-// sea una buena idea armar un for? para cargar un array que vaya actualizando os valhoras das lineas!
+// Tablero definitivo
+// Cada elemento es una fila
+//
+// Ejemplo:
+//
+// [
+//   [Mario, Luigi, Caja, Mario, Daisy],
+//   [Goomba, Mario, Mario, Luigi, Caja]
+// ]
+//
 let cuadricula = [];
 
-    // cuadricula (1) = linea [1],linea [2],linea [3],linea [4],linea [5]; actualiza (...)
-    // cuadricula (2) = linea [1],linea [2],linea [3],linea [4],linea [5]; actualiza (...)
-    // cuadricula guardariaa los valores de cada tirada!
 
-let linea = [];
-//declaracion IA: GPT me ayudo a revisar el if : habia olvidado descontar el contador al des-seleccionar <:)
+// ============================================================
+// 3. ELEMENTOS DEL HTML
+// ============================================================
 
-dado1.addEventListener ("click", () => {
-    if (encendido1 === false) { 
-    console.log("El usuario seleccionó dado1");
-    contadorDadosPermaMesa ++;
-    seleccion [0] = preseleccion [0];
-        encendido1 = true 
-        dadoSeleccionado (dado1);
-    } else {
-            console.log("El usuario des-seleccionó dado1");
-        encendido1 = false;
-        contadorDadosPermaMesa--;
-        seleccion [0] = null;
-            dadoSeleccionado (dado1);
+const botonTirada = document.getElementById("tirada");
+
+const dadosHTML = [
+    document.getElementById("dado1"),
+    document.getElementById("dado2"),
+    document.getElementById("dado3"),
+    document.getElementById("dado4"),
+    document.getElementById("dado5")
+];
+
+const intercambios = [
+    document.getElementById("intercambio1"),
+    document.getElementById("intercambio2"),
+    document.getElementById("intercambio3"),
+    document.getElementById("intercambio4")
+];
+
+
+// ============================================================
+// 4. TIRAR LOS DADOS
+// ============================================================
+
+function tirarDados() {
+
+    for (let i = 0; i < limite; i++) {
+
+        // Si el dado NO está seleccionado,
+        // puede cambiar su valor.
+        if (seleccionados[i] === false) {
+
+            const valorAleatorio =
+                dado[Math.floor(Math.random() * dado.length)];
+
+            dadosActuales[i] = valorAleatorio;
+        }
     }
+}
+
+
+// ============================================================
+// 5. MOSTRAR LOS DADOS EN PANTALLA
+// ============================================================
+
+function mostrarDados() {
+
+    dadosHTML.forEach((dadoHTML, i) => {
+
+        if (dadosActuales[i] !== null) {
+            dadoHTML.innerHTML = dadosActuales[i];
+        } else {
+            dadoHTML.innerHTML = "";
+        }
+
+    });
+}
+
+
+// ============================================================
+// 6. SELECCIONAR / DESELECCIONAR DADOS
+// ============================================================
+
+function cambiarSeleccion(i) {
+
+    if (seleccionados[i] === false) {
+
+        // -----------------------------
+        // SELECCIONAR
+        // -----------------------------
+
+        seleccionados[i] = true;
+        contadorDadosMesa++;
+
+        console.log(`Seleccionó dado ${i + 1}`);
+
+    } else {
+
+        // -----------------------------
+        // DESELECCIONAR
+        // -----------------------------
+
+        seleccionados[i] = false;
+        contadorDadosMesa--;
+
+        console.log(`Des-seleccionó dado ${i + 1}`);
+    }
+
+    dadosHTML[i].classList.toggle(
+        "dado-seleccionado",
+        seleccionados[i]
+    );
+}
+
+
+// ============================================================
+// 7. EVENTOS DE LOS DADOS
+// ============================================================
+
+dadosHTML.forEach((dadoHTML, i) => {
+
+    dadoHTML.addEventListener("click", () => {
+
+        cambiarSeleccion(i);
+
+    });
+
 });
 
-dado2.addEventListener ("click", () => {
-     if (encendido2 === false) {
-    console.log("El usuario seleccionó dado2");
-    contadorDadosPermaMesa ++;
-    seleccion [1] = preseleccion [1];
-    encendido2 = true 
-    dadoSeleccionado (dado2);}
-     else {
-            console.log("El usuario des-seleccionó dado2");
-        encendido2 = false;
-        contadorDadosPermaMesa--;
-        seleccion [1] = null;
-        dadoSeleccionado (dado2);
-     }
+
+// ============================================================
+// 8. INTERCAMBIAR DADOS CON LAS FLECHAS
+// ============================================================
+
+intercambios.forEach((boton, i) => {
+
+    boton.addEventListener("click", () => {
+
+        // Intercambiamos el dado i con el siguiente
+        [
+            dadosActuales[i],
+            dadosActuales[i + 1]
+        ] = [
+            dadosActuales[i + 1],
+            dadosActuales[i]
+        ];
+
+        mostrarDados();
+    });
+
 });
 
-dado3.addEventListener ("click", () => {
-     if (encendido3 === false) {
-    console.log("El usuario seleccionó dado3");
-    contadorDadosPermaMesa ++;
-    seleccion [2] = preseleccion [2];
-encendido3 = true 
-        dadoSeleccionado (dado3);}
-     else {encendido3 = false;
-        contadorDadosPermaMesa--;
-        seleccion [2] = null;
-        dadoSeleccionado (dado3);
-     }
+
+// ============================================================
+// 9. BOTÓN "TIRADA"
+// ============================================================
+
+botonTirada.addEventListener("click", () => {
+
+    tirarDados();
+
+    numeroTiradas++;
+
+    mostrarDados();
+
+    comprobarFinDeTirada();
+
 });
 
-dado4.addEventListener ("click", () => {
-     if (encendido4 === false) {
-        console.log("El usuario seleccionó dado4");
-    contadorDadosPermaMesa ++;
-    seleccion [3] = preseleccion [3];
-encendido4 = true
-dadoSeleccionado (dado4); }
-     else {
-                console.log("El usuario des-seleccionó dado4");
-                encendido4 = false;
-        contadorDadosPermaMesa--;
-        seleccion [3] = null;
-        dadoSeleccionado (dado4);
-     }
-});
 
-dado5.addEventListener ("click", () => {
-     if (encendido5 === false) {
-    console.log("El usuario seleccionó dado5");
-    contadorDadosPermaMesa ++;
-    seleccion [4] = preseleccion [4];
-encendido5 = true
-dadoSeleccionado (dado5); }
-     else {encendido5 = false;
-        contadorDadosPermaMesa--;
-        seleccion [4] = null;
-        dadoSeleccionado (dado5);
-     }
-});
+// ============================================================
+// 10. COMPROBAR SI TERMINÓ LA RONDA
+// ============================================================
 
-// n sera la posicion de la linea
-let n=0;
-function saltoLinea (){
-if (contadorDadosPermaMesa === limite || numeroTiradas === 3) {
-   //reseteo botones, contador y actualizo cuadricula
-   numeroTiradas = 0;
-   contadorDadosPermaMesa = 0;
+function comprobarFinDeTirada() {
 
-   linea [n] = preseleccion;
-//intentare dejar de mostrar desde linea para mostrar desde cuadricula
-   cuadricula.push (preseleccion);
+    /*
+        La ronda termina si:
 
-   lineaCae();
+        1. Los cinco dados fueron seleccionados
+
+        O
+
+        2. Se hicieron tres tiradas
+    */
+
+    if (
+        contadorDadosMesa === limite ||
+        numeroTiradas === 3
+    ) {
+
+        terminarRonda();
+    }
+}
+
+
+// ============================================================
+// 11. TERMINAR RONDA
+// ============================================================
+
+function terminarRonda() {
+
+    console.log("Terminó la ronda");
+
+    // --------------------------------------------------------
+    // Guardamos una COPIA de los dados actuales
+    // --------------------------------------------------------
+
+    cuadricula.push([...dadosActuales]);
+
+    console.log("Cuadrícula:", cuadricula);
+
+
+    // --------------------------------------------------------
+    // Buscamos combinaciones
+    // --------------------------------------------------------
+
     tresEnLinea();
 
-        //des-selecciono dados
-    //declaracion IA: Gemini me ampio las herramientas posibles del toggle
-    dado1.classList.toggle("dado-seleccionado", false)
-    dado2.classList.toggle("dado-seleccionado", false)
-    dado3.classList.toggle("dado-seleccionado", false)
-    dado4.classList.toggle("dado-seleccionado", false)
-    dado5.classList.toggle("dado-seleccionado", false)
 
-preseleccion = [null,null,null,null,null];
-seleccion = [null,null,null,null,null];
-console.log ("la cuadricula es", cuadricula)
-encendido1 = false;
-encendido2 = false;
-encendido3 = false;
-encendido4 = false;
-encendido5 = false;
+    // --------------------------------------------------------
+    // Hacemos caer los elementos
+    // --------------------------------------------------------
 
-mostrarDados();
-n++
-huecos ();
-} }
+    rellenarTodosLosHuecos();
 
-function lineaCae () {
-let relleno = "";
-    for (let i = 0; i < cuadricula[n].length; i++) {
 
-        if (cuadricula[n][i] != null) {
-            relleno += '<div>' + cuadricula[n][i] + '</div>';
-        } else {
-            relleno += '<div></div>';
-        }
-let altura = '#linea'+ n;
-document.querySelector(altura).innerHTML = relleno;}
+    // --------------------------------------------------------
+    // Mostramos nuevamente el tablero
+    // --------------------------------------------------------
+
+    mostrarCuadricula();
+
+
+    // --------------------------------------------------------
+    // Reiniciamos la ronda
+    // --------------------------------------------------------
+
+    numeroTiradas = 0;
+    contadorDadosMesa = 0;
+
+    dadosActuales = [null, null, null, null, null];
+
+    seleccionados = [
+        false,
+        false,
+        false,
+        false,
+        false
+    ];
+
+    dadosHTML.forEach((dadoHTML) => {
+
+        dadoHTML.classList.remove("dado-seleccionado");
+
+    });
+
+    mostrarDados();
 }
 
-// esta funcion analizaria los valores de la cuadricula y la idea es que se eliminen al haber tres en linea
-// opcion 1) todo el sector ; opcion dos: solo los que estan en linea
 
-//Declaración de IA: GPT me ayudó a plantear la estructura correcta para cuadricula[fila][columna]
-// venia intentando cuadricula [i,j] y me daba undefined ; parece que al haber hecho el push la cuadricula queda [cuadricula[linea[posicion]]]
-function tresEnLinea () {
-    let evaluador1 = "";
-    let evaluador2 = "";
-    let evaluador3 = "";
-    let evaluador4 = "";
-    let evaluador5 = "";
-    let evaluador6 = "";
-    let ctd= 0;
-    let sentido = "";
-    //recorro la cuadricula
-    for (let i=0; i<cuadricula.length; i++) {
-        for (let j=0; j<cuadricula.length-2; j++){
-            evaluador1 = cuadricula [i][j];
-            evaluador2 = cuadricula [i][j+1];
-            evaluador3 = cuadricula [i][j+2];
-            
-            // tres en linea horizontal
-            if (evaluador1 === evaluador2 && evaluador2=== evaluador3) {
-                console.log ("borrar horizontal");
-                sentido = "horizontal";
-              /*  let eva4 = cuadricula [i][j+3];
-                let eva5 = cuadricula [i][j+4];
-                if (evaluador3 === eva4 && evaluador3 === eva5) {
-                    console.log ("cinco posiciones")
-                   ctd=5;
-                } else if (evaluador3 === eva4) {
-                    console.log ("cuatro posiciones");
-                   ctd=4;
-                } else {}*/
-                    console.log ("tres posiciones")
-                     ctd = 3;
-                
-borrarTCoC (sentido,ctd,i,j)
+// ============================================================
+// 12. MOSTRAR LA CUADRÍCULA
+// ============================================================
+
+function mostrarCuadricula() {
+
+    for (let fila = 0; fila < cuadricula.length; fila++) {
+
+        const elementoHTML =
+            document.querySelector("#linea" + fila);
+
+        // Si esa fila todavía no existe en el HTML,
+        // no hacemos nada.
+        if (elementoHTML === null) {
+            continue;
+        }
+
+        let contenido = "";
+
+        for (let columna = 0; columna < limite; columna++) {
+
+            const valor = cuadricula[fila][columna];
+
+            if (valor !== null) {
+
+                contenido += `<div>${valor}</div>`;
+
+            } else {
+
+                contenido += `<div></div>`;
             }
-            }
-            }
-            
-            // tres en linea vertical
-        for (let l=0; l< linea.length - 2; l++){
-            console.log("tercera line")
-             for (let k=0; k<limite;k++){
-               evaluador4 = cuadricula [l][k];
-                evaluador5 = cuadricula [l+1][k];
-                evaluador6 = cuadricula [l+2][k];
-                if (evaluador4 === evaluador5 && evaluador5=== evaluador6) {
-                console.log ("borrar vertical");
-                sentido = "vertical";
-                /*let eva7 = cuadricula [l+3][k];
-                let eva8 =  cuadricula [l+4][k];
-                if (evaluador4 === eva7 && evaluador4 === eva8) {
-                    console.log ("cinco posiciones")
-                     ctd=5;
-                } else if (evaluador4 === eva7) {
-                    console.log ("cuatro posiciones")
-                     ctd = 4;
-                } else {}*/
-                    console.log ("tres posiciones")
-                     ctd =3;
-                
-                borrarTCoC (sentido,ctd,l,k)
-            }
-            }
-}}
-// ahora, si encontramos tres, cuatro o cinco en linea deberiamos borrar valores de la cuadrilla, y reempazarlos por los "que caen de arriba". hay que modificar el codigo S:
-//necesitamos un return del if, tanto en horizontal como en vertical
-function borrarTCoC (sentido,ctd,fila,columna) {
-//borramos n objetos segun cuantos elementos en linea haya
-if (sentido==="horizontal"){
-for (let h=0; h<ctd; h++){
-    cuadricula[fila][columna+h] = null;
-  //  caeLinea(fila,columna,h)
-}} else if (sentido === "vertical"){
-for (let h=0; h<ctd; h++){
-    cuadricula[fila+h][columna] = null;
-  //  caeLinea(fila,columna,h)
-}}
-console.log(cuadricula)
-}/*
-function caeLinea (fila,columna) {
-    for (let g=0; g<5; g++)
-    if (cuadricula[fila+1][columna+g] != null){
-        cuadricula[fila][columna+g] = cuadricula[fila+1][columna+g];
-        cuadricula[fila+1][columna+g] = null; 
+        }
+
+        elementoHTML.innerHTML = contenido;
     }
-}*/
-function huecos () {
-if (n===5) {
-    for (let i=0;i<=4;i++){
-    n=i;
-    rellenarHuecos();
-    lineaCae();}
-}}
-function rellenarHuecos(){
-    for (let i=0; i<=4;i++){
-        for (let j=4; j>0;j--){
-            if (cuadricula[j-1][i]===null && cuadricula[j][i] != null){
-                cuadricula[j-1][i]=cuadricula[i][j];
-                cuadricula[j][i]=null;
+}
+
+
+// ============================================================
+// 13. BUSCAR TRES EN LÍNEA
+// ============================================================
+
+function tresEnLinea() {
+
+    buscarHorizontal();
+    buscarVertical();
+}
+
+
+// ============================================================
+// 14. BUSCAR HORIZONTALMENTE
+// ============================================================
+
+function buscarHorizontal() {
+
+    for (let fila = 0; fila < cuadricula.length; fila++) {
+
+        /*
+            Tenemos cinco columnas.
+
+            Por eso las posiciones iniciales posibles
+            para buscar tres son:
+
+            0 → 0,1,2
+            1 → 1,2,3
+            2 → 2,3,4
+        */
+
+        for (let columna = 0; columna <= 2; columna++) {
+
+            const a = cuadricula[fila][columna];
+            const b = cuadricula[fila][columna + 1];
+            const c = cuadricula[fila][columna + 2];
+
+            // No queremos considerar tres espacios vacíos
+            if (
+                a !== null &&
+                a === b &&
+                b === c
+            ) {
+
+                let cantidad = 3;
+
+                // ¿Hay un cuarto?
+                if (
+                    columna + 3 < limite &&
+                    a === cuadricula[fila][columna + 3]
+                ) {
+
+                    cantidad = 4;
+                }
+
+                // ¿Hay un quinto?
+                if (
+                    columna + 4 < limite &&
+                    a === cuadricula[fila][columna + 4]
+                ) {
+
+                    cantidad = 5;
+                }
+
+                console.log(
+                    `Hay ${cantidad} en línea horizontal`
+                );
+
+                borrarTCoC(
+                    "horizontal",
+                    cantidad,
+                    fila,
+                    columna
+                );
             }
         }
     }
 }
+
+
+// ============================================================
+// 15. BUSCAR VERTICALMENTE
+// ============================================================
+
+function buscarVertical() {
+
+    // Necesitamos al menos tres filas
+    for (
+        let fila = 0;
+        fila <= cuadricula.length - 3;
+        fila++
+    ) {
+
+        for (let columna = 0; columna < limite; columna++) {
+
+            const a = cuadricula[fila][columna];
+            const b = cuadricula[fila + 1][columna];
+            const c = cuadricula[fila + 2][columna];
+
+            if (
+                a !== null &&
+                a === b &&
+                b === c
+            ) {
+
+                console.log("Tres en línea vertical");
+
+                borrarTCoC(
+                    "vertical",
+                    3,
+                    fila,
+                    columna
+                );
+            }
+        }
+    }
+}
+
+
+// ============================================================
+// 16. BORRAR LAS PIEZAS DE UNA LÍNEA
+// ============================================================
+
+function borrarTCoC(sentido, cantidad, fila, columna) {
+
+    if (sentido === "horizontal") {
+
+        for (let i = 0; i < cantidad; i++) {
+
+            cuadricula[fila][columna + i] = null;
+        }
+
+    } else if (sentido === "vertical") {
+
+        for (let i = 0; i < cantidad; i++) {
+
+            cuadricula[fila + i][columna] = null;
+        }
+    }
+
+    console.log("Después de borrar:", cuadricula);
+}
+
+
+// ============================================================
+// 17. HACER CAER LOS ELEMENTOS
+// ============================================================
+
+function rellenarTodosLosHuecos() {
+
+    for (let columna = 0; columna < limite; columna++) {
+        hacerCaerColumna(columna);
+    }
+}
+
+
+function hacerCaerColumna(columna) {
+
+    // filaDestino representa el hueco más bajo disponible
+    let filaDestino = 0;
+
+    for (let fila = 0; fila < cuadricula.length; fila++) {
+
+        if (cuadricula[fila][columna] !== null) {
+
+            // Movemos la ficha hacia abajo
+            cuadricula[filaDestino][columna] =
+                cuadricula[fila][columna];
+
+            // Si la ficha estaba más arriba,
+            // dejamos vacío el lugar original
+            if (filaDestino !== fila) {
+                cuadricula[fila][columna] = null;
+            }
+
+            filaDestino++;
+        }
+    }
+}
+// ============================================================
+// FIN
+// ============================================================
