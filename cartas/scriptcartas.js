@@ -11,6 +11,8 @@ let mostrarTiempo = document.querySelector("#tiempo");
 
 let ronda = 1;
 
+let juegoTerminado = false;
+
 let contenedorCartas = document.querySelector("#cartas");
 
 
@@ -24,8 +26,8 @@ let cartasRonda1 = [
     "hongo",
     5,
     2,
-    8,
-    6
+    "mario",
+    10
 ];
 
 
@@ -35,7 +37,7 @@ let cartasRonda2 = [
     4,
     9,
     "estrella",
-    6,
+    8,
     3,
     "hongo",
     8,
@@ -46,7 +48,7 @@ let cartasRonda2 = [
     4,
     "luna",
     9,
-    6
+    "princesa"
 ];
 
 
@@ -66,16 +68,41 @@ function crearCartas(cartas) {
 
         carta.addEventListener("click", function() {
 
+            // Si el juego terminó, no permite hacer click
+            if (juegoTerminado) {
+                return;
+            }
+
+
             // Mostramos la imagen correspondiente
-            if (numero == "luna") {
+            if (numero == "estrella") {
+
+                imagen.src = "img/estrella.png";
+
+            } else if (numero == "princesa") {
+
+                imagen.src = "img/princesa.png";
+
+            } else if (numero == "hongo") {
+
+                imagen.src = "img/hongo.png";
+
+            } else if (numero == "mario") {
+
+                imagen.src = "img/mario.png";
+
+            } else if (numero == "luna") {
+
                 imagen.src = "img/luna.png";
+
             } else {
+
                 imagen.src = "img/" + numero + ".png";
             }
 
 
             // ESTRELLA
-            if (numero == "estrella.png") {
+            if (numero == "estrella") {
 
                 puntaje = puntaje + 10;
 
@@ -84,7 +111,9 @@ function crearCartas(cartas) {
 
 
             // HONGO
-            if (numero == "hongo.png") {
+            if (numero == "hongo") {
+
+                juegoTerminado = true;
 
                 clearInterval(cronometro);
 
@@ -100,7 +129,7 @@ function crearCartas(cartas) {
 
 
             // LUNA
-            if (numero == "luna.png") {
+            if (numero == "luna") {
 
                 puntaje = puntaje + 10;
 
@@ -111,7 +140,7 @@ function crearCartas(cartas) {
             // PRINCESA
             if (ronda == 1 && numero == "princesa") {
 
-                alert("¡Encontraste a la princesa! desbloqueaste la segunda ronda.");
+                alert("¡Encontraste a la princesa! Desbloqueaste la segunda ronda.");
 
                 ronda = 2;
 
@@ -137,6 +166,8 @@ function crearCartas(cartas) {
 
                     if (tiempo == 0) {
 
+                        juegoTerminado = true;
+
                         clearInterval(cronometro);
 
                         alert("¡Oh no! Se acabó el tiempo.");
@@ -154,17 +185,63 @@ function crearCartas(cartas) {
 
 
             // MARIO
-            if (ronda == 2 && numero == "mario.png") {
+            if (ronda == 2 && numero == "mario") {
+
+                juegoTerminado = true;
 
                 clearInterval(cronometro);
 
-                alert("¡Encontraste a Mario! ¡Ahora puede estar junto a la princesa! ❤️");
+                // Aparece el alert
+                alert("¡Buen trabajo! Mario ha sido encontrado");
 
-                resultado.innerText = "¡FIN DEL JUEGO!";
+                // Desaparecen las cartas
+                contenedorCartas.innerHTML = "";
 
+                // Aparece el mensaje
+                resultado.innerText =
+                    "¡Encontraste a Mario! ¡Ahora puede estar junto a la princesa! ❤️";
+                    mensaje.innerText = ""; 
+
+                // Aparece la imagen de la pareja
+                let pareja = document.createElement("img");
+
+                pareja.src = "img/pareja.png";
+
+                pareja.classList.add("pareja");
+
+                resultado.appendChild(document.createElement("br"));
+
+                resultado.appendChild(pareja);
+
+
+                // Aparecen los corazones
+                for (let i = 0; i < 6; i++) {
+
+                    let corazon = document.createElement("span");
+
+                    corazon.innerText = "❤️";
+
+                    corazon.classList.add("corazon");
+
+                    corazon.style.setProperty(
+                        "--x",
+                        (Math.random() * 300 - 150) + "px"
+                    );
+
+                    corazon.style.setProperty(
+                        "--y",
+                        (Math.random() * -150 - 50) + "px"
+                    );
+
+                    resultado.appendChild(corazon);
+                }
+
+
+                // Aparece el puntaje
                 puntajeFinal.innerText =
                     "Tu puntaje es " + puntaje + " puntos";
 
+                // Aparece reiniciar
                 reiniciar.style.display = "block";
             }
 
@@ -176,11 +253,11 @@ function crearCartas(cartas) {
 }
 
 
-// EMPieza LA RONDA 1
+// EMPIEZA LA RONDA 1
 crearCartas(cartasRonda1);
 
 
-// CRONÓMETRO DE 1ra ronda
+// CRONÓMETRO DE 1ra RONDA
 let cronometro = setInterval(function() {
 
     tiempo--;
@@ -189,6 +266,8 @@ let cronometro = setInterval(function() {
 
 
     if (tiempo == 0) {
+
+        juegoTerminado = true;
 
         clearInterval(cronometro);
 
@@ -211,5 +290,3 @@ reiniciar.addEventListener("click", function() {
     location.reload();
 
 });
-
-

@@ -104,7 +104,34 @@ h1 {
     text-align: center;
     text-shadow: 3px 3px 0px black;
 }
- 
+ #resultado {
+    position: relative;
+}
+
+.pareja {
+    width: 300px;
+}
+
+.corazon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 30px;
+    animation: subir 6s ease-out forwards;
+}
+
+@keyframes subir {
+
+    0% {
+        transform: translate(0, 0);
+        opacity: 6;
+    }
+
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
 /* ========================================
    JUEGO DE DADOS 
    ======================================== */
