@@ -1,5 +1,5 @@
 /* ========================================
-   JUEGO DE CARTAS 
+   BASE — fondo compartido por todo el sitio
    ======================================== */
 body {
     margin: 0;
@@ -9,6 +9,17 @@ body {
     background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
+ 
+h1 {
+    text-align: center;
+    font-size: 45px;
+    color: white;
+    text-shadow: 4px 4px 0px #000;
+}
+ 
+/* ========================================
+   JUEGO DE CARTAS
+   ======================================== */
  
 /* Contenedor de las cartas */
 #cartas {
@@ -46,6 +57,7 @@ body {
     font-size: 30px;
     font-weight: bold;
 }
+ 
 #reiniciar {
     background-color: #e63946;
     color: white;
@@ -61,12 +73,6 @@ body {
     transform: scale(1.05);
 }
  
-h1 {
-    text-align: center;
-    font-size: 45px;
-    color: white;
-    text-shadow: 4px 4px 0px #000;
-}
 #mensaje {
     text-align: center;
     color: white;
@@ -89,6 +95,7 @@ h1 {
     font-weight: bold;
     border-radius: 8px;
 }
+ 
 #puntajeFinal {
     color: white;
     font-size: 25px;
@@ -103,15 +110,14 @@ h1 {
     font-weight: bold;
     text-align: center;
     text-shadow: 3px 3px 0px black;
-}
- #resultado {
     position: relative;
 }
-
+ 
+/* Animación de corazones al formar pareja (agregado por la compañera) */
 .pareja {
     width: 300px;
 }
-
+ 
 .corazon {
     position: absolute;
     left: 50%;
@@ -119,191 +125,21 @@ h1 {
     font-size: 30px;
     animation: subir 6s ease-out forwards;
 }
-
+ 
 @keyframes subir {
-
     0% {
         transform: translate(0, 0);
         opacity: 6;
     }
-
+ 
     100% {
         transform: translate(var(--x), var(--y));
         opacity: 0;
     }
 }
-/* ========================================
-   JUEGO DE DADOS 
-   ======================================== */
- 
-/*#tirada {}  aqui para ponerle onda al boton de tirada  */
- 
-body {
-    margin: 0;
-    background-image: url("../cartas/img/fondo_cartas.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    font-family: Arial, sans-serif;
-}
-
-.dados {
-    display: flex;
-    background-color: black;
-    height: 80px;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-}
- 
-.dados div {
-    height: 60px;
-    width: 60px;
-    background-color: white;
-    padding: 3px;
-}
- 
-.tablero {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    height: 450px;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-}
- 
-.tablero article {
-    display: inline-flex;
-    height: 60px;
-    width: 400px;
-    background-color: white;
-    padding: 3px;
-    align-items: center;
-    gap: 12px;
-}
- 
-.tablero article div {
-    display: inline-flex;
-    flex-direction: row;
-    height: 60px;
-    width: 60px;
-}
- 
-.dado-seleccionado {
-    border: 3px solid red;
-}
  
 /* ========================================
-   JUEGO DE PREGUNTAS (Mario) — pendiente de completar
-   ======================================== */
- 
-body {
-    margin: 0;
-    background-image: url("../cartas/img/fondo_cartas.png");
-     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    font-family: Arial, sans-serif;
-}
- 
-/* Contenedor de las cartas */
-#cartas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    max-width: 1000px;
-    margin: 30px auto;
-}
- 
-/* Cada carta */
-#cartas button {
-    width: 150px;
-    height: 200px;
-    padding: 0;
-    border: 7px solid green;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-}
- 
-/* Imagen de la carta */
-#cartas img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
- 
-/* Tiempo */
-#tiempo {
-    position: fixed;
-    right: 30px;
-    top: 30px;
-    font-size: 30px;
-    font-weight: bold;
-}
-#reiniciar {
-    background-color: #e63946;
-    color: white;
-    border: 5px solid #1b5e20;
-    border-radius: 8px;
-    padding: 12px 25px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
- 
-#reiniciar:hover {
-    transform: scale(1.05);
-}
- 
-h1 {
-    text-align: center;
-    font-size: 45px;
-    color: white;
-    text-shadow: 4px 4px 0px #000;
-}
-#mensaje {
-    text-align: center;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: 4px solid green;
-    padding: 12px;
-    width: fit-content;
-    margin: 20px auto;
-}
- 
-#temporizador {
-    position: fixed;
-    top: 20px;
-    right: 25px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    border: 5px solid green;
-    padding: 12px 20px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 8px;
-}
-#puntajeFinal {
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px;
-}
- 
-#resultado {
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 3px 3px 0px black;
-}
- 
-/* ========================================
-   JUEGO DE DADOS 
+   JUEGO DE DADOS
    ======================================== */
  
 /*#tirada {}  aqui para ponerle onda al boton de tirada  */
@@ -546,12 +382,6 @@ h1 {
 }
  
 /* ========================================
-   PUNTAJES
+   PUNTAJES — INCOMPLETO
    ======================================== */
-body {
-    margin: 0;
-    background-image: url("../cartas/img/fondo_cartas.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    font-family: Arial, sans-serif;
+ 
