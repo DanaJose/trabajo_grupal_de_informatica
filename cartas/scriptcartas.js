@@ -15,6 +15,11 @@ let juegoTerminado = false;
 
 let contenedorCartas = document.querySelector("#cartas");
 
+function mezclarCartas (elegirCartas){
+
+    elegirCartas.sort(() => Math.random() - 0.5);
+
+}
 
 // CARTAS DE LA RONDA 1
 let cartasRonda1 = [
@@ -53,7 +58,7 @@ let cartasRonda2 = [
 
 
 function crearCartas(cartas) {
-
+mezclarCartas(cartas);
     cartas.forEach(function(numero) {
 
         let carta = document.createElement("button");
