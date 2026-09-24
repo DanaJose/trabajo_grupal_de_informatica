@@ -186,6 +186,10 @@ intercambios.forEach((boton, i) => {
 
 botonTirada.addEventListener("click", () => {
 
+    //colocamos fin juego antes para permitir que valgan los puntos de la ultima jugada;
+
+    finJuego ();
+
     tirarDados();
 
     numeroTiradas++;
@@ -230,6 +234,7 @@ function comprobarFinDeTirada() {
 function terminarRonda() {
 
     console.log("Terminó la ronda");
+    ronda++;
 
     // --------------------------------------------------------
     // Guardamos una COPIA de los dados actuales
@@ -399,6 +404,7 @@ function buscarHorizontal() {
                     fila,
                     columna
                 );
+                sumarPuntaje(cantidad);
             }
         }
     }
@@ -438,6 +444,7 @@ function buscarVertical() {
                     fila,
                     columna
                 );
+                sumarPuntaje(3);
             }
         }
     }
@@ -507,3 +514,31 @@ function hacerCaerColumna(columna) {
 // ============================================================
 // FIN
 // ============================================================
+
+
+//  puntajes!!
+//vamos a agregar un contador en tres en linea horizontal y en tres en linea vertical
+// podemos togglear el fondo si puntaje > algun valor especificco
+let puntajeActual = 0;
+let ronda = 0;
+
+function sumarPuntaje (cantidad) {
+    puntajeActual = puntajeActual + (cantidad * 5) * ronda;
+    if (ronda===7) {
+        puntajeActual = puntajeActual*2
+    }
+    texto.innerHTML =  `<h2> ${puntajeActual} </h2>`
+}
+
+
+const texto = document.getElementById("texto");
+
+function finJuego () {
+ 
+    for  (let i=0;i<limite;i++){
+
+    if ( cuadricula.length > 5 && cuadricula[5][i]  !==  null  )
+        {
+            botonTirada.disabled = true;
+        } }
+}
