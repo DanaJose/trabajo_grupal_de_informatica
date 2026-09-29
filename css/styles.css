@@ -2,27 +2,12 @@
    BASE — fondo compartido por todo el sitio
    ======================================== */
 body {
-    margin: 4cqmax;
+    margin: 0;
     background-image: url("../cartas/img/fondo_cartas.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     font-family: Arial, sans-serif;
-}
-nav {
-    background-image: url("../cartas/img/nav.png");
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 15px;
-    text-align: center;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    margin: 0 15px;
-}
-nav a:hover {
-    text-decoration: underline;
 }
  
 h1 {
@@ -182,6 +167,7 @@ h1 {
     align-items: center;
     gap: 12px;
     justify-content: center;
+ 
 }
  
 .tablero article {
@@ -189,7 +175,7 @@ h1 {
     height: 60px;
     width: 400px;
     background-color: white;
-        border: 3px solid #000;
+       border: 3px solid #000;
     padding: 3px;
     align-items: center;
     gap: 12px;
@@ -399,4 +385,38 @@ h1 {
 /* ========================================
    PUNTAJES — INCOMPLETO
    ======================================== */
- 
+ body {
+  display: flex;
+  flex-direction: column;   /* Alinea los elementos en vertical (título, puzzle, botón) */
+  align-items: center;       /* Centrado horizontal */
+  justify-content: center;  /* Centrado vertical */
+  min-height: 100vh;        /* Ocupa el 100% de la altura de la pantalla */
+  margin: 0;                /* Elimina márgenes por defecto */
+  background-color: #f0f0f0; /* Opcional: un color de fondo limpio */
+  font-family: Arial, sans-serif;
+}
+
+
+
+   .puzzle {
+    width: 300px;
+    height: 300px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    border: 3px solid black;
+    
+    text-align: center;
+    justify-content: center;
+}
+
+.casilla {
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.bloqueado {
+    display: none;
+}
