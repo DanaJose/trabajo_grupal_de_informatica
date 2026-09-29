@@ -2,12 +2,27 @@
    BASE — fondo compartido por todo el sitio
    ======================================== */
 body {
-    margin: 0;
+    margin: 4cqmax;
     background-image: url("../cartas/img/fondo_cartas.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     font-family: Arial, sans-serif;
+}
+nav {
+    background-image: url("../cartas/img/nav.png");
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    text-align: center;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 15px;
+}
+nav a:hover {
+    text-decoration: underline;
 }
  
 h1 {
