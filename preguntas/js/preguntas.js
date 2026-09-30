@@ -94,7 +94,7 @@ async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
     mensajeFeedback.textContent = "¡Correcto!";
   } else {
     botonElegido.classList.add("opcion-incorrecta");
-    mensajeFeedback.textContent = "Incorrecto.";
+    mensajeFeedback.textContent = "Incorrecto";
     racha = 0;
   }
  
