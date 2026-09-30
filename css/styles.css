@@ -11,9 +11,7 @@
     max-width: 800px;
     box-sizing: border-box;
 }
- h1 {
-    color: #ff0000;
-}
+ 
 
     
 body {
@@ -43,7 +41,7 @@ nav a:hover {
 h1 {
     text-align: center;
     font-size: 45px;
-    color: white;
+    color: rgb(225, 58, 58);
     text-shadow: 4px 4px 0px #000;
 }
  
