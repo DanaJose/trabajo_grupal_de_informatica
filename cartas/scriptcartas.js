@@ -219,7 +219,7 @@ mezclarCartas(cartas);
                 resultado.appendChild(pareja);
 
 
-                // Aparecen los corazones
+                // Aparecen los corazones/ tema q no hemos visto ponerlo en la declaracion
                 for (let i = 0; i < 6; i++) {
 
                     let corazon = document.createElement("span");
