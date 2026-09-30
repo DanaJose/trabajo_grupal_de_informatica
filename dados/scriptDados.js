@@ -542,3 +542,25 @@ function finJuego () {
             botonTirada.disabled = true;
         } }
 }
+
+const textoInstrucciones = document.getElementById ("textoInstrucciones")
+let weinst = true; 
+function Instrucciones (){
+    if (weinst === true){
+let instruccionesTexto = `Este juego consta de dos partes:
+
+	La primera parte consiste en tirar dados armando distintas combinaciones, intentando que queden la mayor cantidad de figuras juntas. 
+	Para lograr esto podemos "dejar el dado en la mesa" seleccionando el dado, haciendo click en él, y podemos también cambiar la posición del dado antes de seleccionarlo, para favorecer una y otra combinación. Cada jugada termina después de tres tiros o si seleccionamos todos los dados y "tiramos".
+
+	Dejar tres o más figuras juntas suma puntos y hace que estas figuras no caigan al tablero.
+	
+	Las figuras restantes caerán al tablero, en la casilla más baja disponible según su posición y allí permanecerán hasta pertenecer a una eventual combinación -horizontal o vertical- de tres o más figuras iguales, producto de la caída de las fichas de los tiros subsiguientes.
+
+El juego termina si una ficha que debe caer rebasa el limite del tablero y "no cae".`
+
+textoInstrucciones.innerHTML = instruccionesTexto;
+weinst = false;
+} else {
+    textoInstrucciones.innerHTML = "";
+weinst = true;    
+}}

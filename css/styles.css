@@ -420,3 +420,479 @@ h1 {
 .bloqueado {
     display: none;
 }
+/* ========================================
+   BASE — fondo compartido por todo el sitio
+   ======================================== */
+body {
+    margin: 4cqmax;
+    background-image: url("../cartas/img/fondo_cartas.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+}
+nav {
+    background-image: url("../cartas/img/nav.png");
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    text-align: center;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 15px;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+ 
+h1 {
+    text-align: center;
+    font-size: 45px;
+    color: white;
+    text-shadow: 4px 4px 0px #000;
+}
+ 
+/* ========================================
+   JUEGO DE CARTAS
+   ======================================== */
+ 
+/* Contenedor de las cartas */
+#cartas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+ 
+/* Cada carta */
+#cartas button {
+    width: 150px;
+    height: 200px;
+    padding: 0;
+    border: 7px solid green;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+ 
+/* Imagen de la carta */
+#cartas img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+ 
+/* Tiempo */
+#tiempo {
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+ 
+#reiniciar {
+    background-color: #e63946;
+    color: white;
+    border: 5px solid #1b5e20;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+ 
+#reiniciar:hover {
+    transform: scale(1.05);
+}
+ 
+#mensaje {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 4px solid green;
+    padding: 12px;
+    width: fit-content;
+    margin: 20px auto;
+}
+ 
+#temporizador {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: 5px solid green;
+    padding: 12px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+ 
+#puntajeFinal {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+}
+ 
+#resultado {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 3px 3px 0px black;
+    position: relative;
+}
+ 
+/* Animación de corazones al formar pareja (agregado por la compañera) */
+.pareja {
+    width: 300px;
+}
+ 
+.corazon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 30px;
+    animation: subir 6s ease-out forwards;
+}
+ 
+@keyframes subir {
+    0% {
+        transform: translate(0, 0);
+        opacity: 6;
+    }
+ 
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+ 
+/* ========================================
+   JUEGO DE DADOS
+   ======================================== */
+ 
+/*#tirada {}  aqui para ponerle onda al boton de tirada  */
+ 
+.dados {
+    display: flex;
+    background-color: black;
+    height: 80px;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+ 
+.dados div {
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    padding: 3px;
+}
+ 
+.tablero {
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+ 
+.tablero article {
+    display: inline-flex;
+    height: 60px;
+    width: 400px;
+    background-color: white;
+        border: 3px solid #000;
+    padding: 3px;
+    align-items: center;
+    gap: 12px;
+}
+ 
+.tablero article div {
+    display: inline-flex;
+    flex-direction: row;
+    height: 60px;
+    width: 60px;
+}
+ 
+.dado-seleccionado {
+    border: 3px solid red;
+}
+ 
+/* ========================================
+   JUEGO DE PREGUNTAS (Mario)
+   ======================================== */
+ 
+/* Control genérico de qué pantalla se muestra (inicio / juego / resultado) */
+.pantalla {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 500px;
+    padding: 40px 20px;
+}
+ 
+.pantalla.activa {
+    display: flex;
+}
+ 
+.oculta {
+    display: none !important;
+}
+ 
+/* --- Pantalla de inicio / selección de dificultad --- */
+#pantalla-inicio {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 20px;
+}
+ 
+.globo-dialogo {
+    background: white;
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 25px 30px;
+    max-width: 480px;
+    text-align: left;
+    position: relative;
+}
+ 
+.titulo-globo {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+ 
+.selector-dificultad {
+    margin-top: 20px;
+}
+ 
+.botones-dificultad {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+ 
+.btn-dificultad {
+    background: white;
+    border: 3px solid black;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+ 
+.btn-dificultad:hover {
+    background-color: #ffd54f;
+    transform: scale(1.05);
+}
+ 
+.ilustracion-mario {
+    max-width: 400px;
+    height: auto;
+}
+ 
+/* --- Pantalla de juego en curso --- */
+#pantalla-juego {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+}
+ 
+.info-partida {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 black;
+    margin-bottom: 20px;
+}
+ 
+.tarjeta-pregunta {
+    background: white;
+    border: 4px solid black;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+}
+ 
+#texto-pregunta {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+ 
+.opciones-respuesta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+ 
+.opciones-respuesta button {
+    background: #f1f1f1;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+ 
+.opciones-respuesta button:hover {
+    background: #ffd54f;
+}
+ 
+/* Estas clases las agrega el JS al validar la respuesta */
+.opciones-respuesta button.correcta {
+    background: #a5d6a7;
+    border-color: green;
+}
+ 
+.opciones-respuesta button.incorrecta {
+    background: #ef9a9a;
+    border-color: red;
+}
+ 
+.opciones-respuesta button:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+ 
+.mensaje-feedback {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+ 
+.mensaje-feedback.correcto {
+    color: #2e7d32;
+}
+ 
+.mensaje-feedback.incorrecto {
+    color: #c62828;
+}
+ 
+#btn-siguiente,
+#btn-jugar-de-nuevo {
+    background-color: #e63946;
+    color: white;
+    border: 5px solid #1b5e20;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+ 
+#btn-siguiente:hover,
+#btn-jugar-de-nuevo:hover {
+    transform: scale(1.05);
+}
+ 
+/* --- Pantalla de resultado final --- */
+#pantalla-resultado h2 {
+    color: white;
+    text-shadow: 3px 3px 0 black;
+}
+ 
+.enlace-puntajes {
+    color: white;
+    text-decoration: underline;
+    margin-top: 15px;
+    display: inline-block;
+}
+ 
+/* ========================================
+   PUNTAJES — INCOMPLETO
+   ======================================== */
+ body {
+  display: flex;
+  flex-direction: column;   /* Alinea los elementos en vertical (título, puzzle, botón) */
+  align-items: center;       /* Centrado horizontal */
+  justify-content: center;  /* Centrado vertical */
+  min-height: 100vh;        /* Ocupa el 100% de la altura de la pantalla */
+  margin: 0;                /* Elimina márgenes por defecto */
+  background-color: #f0f0f0; /* Opcional: un color de fondo limpio */
+  font-family: Arial, sans-serif;
+}
+
+
+
+   .puzzle {
+    width: 300px;
+    height: 300px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    border: 3px solid black;
+    
+    text-align: center;
+    justify-content: center;
+}
+
+.casilla {
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.bloqueado {
+    display: none;
+}
+
+#textoInstrucciones {
+    color: yellow;
+    text-shadow: 3px 3px #000 ;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+
+
+ .boton-concentrico {
+            /* Dimensiones del círculo exterior */
+            width: 100px;
+            height: 100px;
+            background-color: #FFDE4D; /* Amarillo principal */
+            border: none;
+            border-radius: 50%; /* Hace que sea completamente redondo */
+            
+            /* Centrado interno y propiedades de pantalla */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+
+            /* Efecto de segundo círculo concéntrico usando sombra interna */
+            /* Cambia el '15px' para ajustar la separación del círculo interno */
+            box-shadow: inset 0 0 0 10px #FFB200; 
+        }
+
+        /* Efecto visual al pasar el cursor (opcional) */
+        .boton-concentrico:hover {
+            transform: scale(1.05);
+            background-color: #FEE75C;
+        }
+
+        .boton-concentrico:active {
+            transform: scale(0.95);
+        }
