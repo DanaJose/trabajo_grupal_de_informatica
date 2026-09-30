@@ -73,6 +73,7 @@ async function obtenerDatoCurioso(nombrePersonaje) {
 }
  
 // Valida si la opción elegida es correcta, actualiza puntaje y muestra feedback
+ let racha = 0;
 async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
   // Deshabilitamos todos los botones para que no se pueda responder dos veces
   const todosLosBotones = contenedorOpciones.querySelectorAll("button");
@@ -85,14 +86,16 @@ async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
  
   const esCorrecta = indiceElegido === indiceCorrecto;
   const pregunta = preguntasActuales[indicePreguntaActual];
- 
+
   if (esCorrecta) {
-    puntajeActual++;
+    racha++;
+    puntajeActual = puntajeActual + 100*racha;
     puntajeActualSpan.textContent = puntajeActual;
     mensajeFeedback.textContent = "¡Correcto!";
   } else {
     botonElegido.classList.add("opcion-incorrecta");
     mensajeFeedback.textContent = "Incorrecto.";
+    racha = 0;
   }
  
   mensajeFeedback.classList.remove("oculta");
