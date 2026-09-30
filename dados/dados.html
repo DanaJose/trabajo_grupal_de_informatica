@@ -22,10 +22,8 @@
 
     <h1>Juego de Dados: Generala / Tres en línea </h1>
     
-    <p id="texto">    </p>    
-
-<button id="tirada">  ¡TIRAR DADOS!  </button>
-
+<button type="button" onclick="Instrucciones()">¿Cómo se juega?</button>
+<p id="textoInstrucciones"></p>         
 
 <!--luego trabajemos esto con el css, la idea de la sección es que cada DIV muestre un dado!--> 
 <section class="dados">
@@ -40,6 +38,10 @@
 <div id="dado5"></div>
 </section>
 
+
+<button id="tirada" class="boton-concentrico">  ¡TIRAR DADOS!  </button>
+
+
 <!--cada articulo de esta seccion seria una linea en el tablero;
 si no puede resolverse asi podriamos agregar 5 divs a cada articulo.!--> 
 <section class="tablero">
@@ -50,6 +52,9 @@ si no puede resolverse asi podriamos agregar 5 divs a cada articulo.!-->
     <article id="linea0"></article>
 
 </section>
+
+<!--en texto mostraremos el puntaje-->
+    <p id="texto">    </p>    
 <footer>Trabajo Práctico de Informática 1 - Universidad Nacional de las Artes - Artes Multimediales</footer>
 
 <script src="scriptDados.js"></script>
