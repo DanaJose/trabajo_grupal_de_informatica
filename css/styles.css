@@ -1,6 +1,21 @@
 /* ========================================
    BASE — fondo compartido por todo el sitio
    ======================================== */
+
+ main section {
+    background-color: rgb(249, 238, 238);
+    border: 4px solid black;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 25px auto;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+ h1 {
+    color: #ff0000;
+}
+
+    
 body {
     margin: 4cqmax;
     background-image: url("../cartas/img/fondo_cartas.png");
