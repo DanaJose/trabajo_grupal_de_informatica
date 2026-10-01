@@ -181,8 +181,8 @@ h1 {
  
 .dados {
     display: flex;
-    background-color: black;
-    height: 80px;
+    background-image: url("../cartas/img/nav.png");
+    height: 90px;
     align-items: center;
     gap: 12px;
     justify-content: center;
@@ -494,3 +494,15 @@ h1 {
         .boton-concentrico:active {
             transform: scale(0.95);
         }
+section a button {
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+border: none;
+border-radius: 8px;
+}
+
+section a button:hover {
+transform: scale(1.05);
+}

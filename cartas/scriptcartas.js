@@ -109,9 +109,9 @@ mezclarCartas(cartas);
             // ESTRELLA
             if (numero == "estrella") {
 
-                puntaje = puntaje + 10;
+                puntaje = puntaje + 100;
 
-                alert("¡Encontraste una estrella! Sumaste 10 puntos.");
+                alert("¡Encontraste una estrella! Sumaste 100 puntos.");
             }
 
 
@@ -136,22 +136,27 @@ mezclarCartas(cartas);
             // LUNA
             if (numero == "luna") {
 
-                puntaje = puntaje + 10;
+                puntaje = puntaje + 200;
 
-                alert("¡Encontraste la luna! Sumaste 10 puntos.");
+                alert("¡Encontraste la luna! Sumaste 200 puntos.");
             }
 
 
             // PRINCESA
             if (ronda == 1 && numero == "princesa") {
 
-                alert("¡Encontraste a la princesa! Desbloqueaste la segunda ronda.");
+                alert("¡Encontraste a la princesa! Desbloqueaste la segunda ronda .");
 
                 ronda = 2;
 
                 mensaje.innerText = "Ahora busca a Mario";
 
                 contenedorCartas.innerHTML = "";
+
+                if (numero == "princesa") {
+
+                puntaje = puntaje + 500;
+            }
 
                 crearCartas(cartasRonda2);
 
@@ -198,6 +203,12 @@ mezclarCartas(cartas);
 
                 // Aparece el alert
                 alert("¡Buen trabajo! Mario ha sido encontrado");
+
+                if (numero == "mario") {
+
+                puntaje = puntaje + 500;
+
+            }
 
                 // Desaparecen las cartas
                 contenedorCartas.innerHTML = "";
