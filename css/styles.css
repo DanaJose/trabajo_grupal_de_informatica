@@ -11,9 +11,16 @@
     max-width: 800px;
     box-sizing: border-box;
 }
- 
 
-    
+#puzzle {
+    width: 250px;
+    margin: 0 auto;
+}
+#colorEquipo {
+    width: 250px;
+    margin: 0 auto;
+}
+
 body {
     margin: 4cqmax;
     background-image: url("../cartas/img/fondo_cartas.png");
