@@ -28,7 +28,7 @@ const bancoPreguntas = [
     texto: "¿Cuál de estas NO es una mejora (power-up) de Mario?",
     opciones: ["Super Champiñón", "Estrella", "Flor de Fuego", "Sandwich de Miga"],
     correcta: 3,
-    personajeParaExtra: null
+    personajeParaExtra: "List of power-ups"
   },
   {
     dificultad: "facil",
@@ -65,21 +65,21 @@ const bancoPreguntas = [
     texto: "¿En qué juego, por primera vez, Mario empezaba a tener sueño y tomaba una siesta si el jugador se mostraba ausente?",
     opciones: ["Super Mario 64", "Super Mario Sunshine", "Super Mario Galaxy", "Super Mario Odyssey"],
     correcta: 0,
-    personajeParaExtra: null
+    personajeParaExtra: "Super Mario 64"
   },
   {
     dificultad: "dificil",
     texto: "¿Cuál fue el primer juego en el que la gorra de Mario puede salir volando?",
     opciones: ["Super Mario 64", "Super Mario Sunshine", "Super Mario 3D World", "Super Mario Odyssey"],
     correcta: 0,
-    personajeParaExtra: null
+    personajeParaExtra: "Super Mario 64"
   },
   {
     dificultad: "dificil",
     texto: "En el juego original de Super Mario Bros. los icónicos overoles de Mario no eran azules. ¿De qué color eran?",
     opciones: ["Rojo", "Verde", "Amarillo", "Negro"],
     correcta: 0,
-    personajeParaExtra: null
+    personajeParaExtra: "Mario"
   }
 ];
  
