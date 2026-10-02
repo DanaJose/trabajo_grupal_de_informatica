@@ -6,6 +6,7 @@
 let preguntasActuales = [];
 let indicePreguntaActual = 0;
 let puntajeActual = 0;
+let puntaPreguntas = 0;
  
 // Referencias a elementos del HTML
 const botonesDificultad = document.querySelectorAll(".btn-dificultad");
@@ -126,6 +127,12 @@ btnSiguiente.addEventListener("click", () => {
   if (indicePreguntaActual < preguntasActuales.length) {
     mostrarPregunta();
   } else {
+   if (puntajeActual>puntaPreguntas){
+    localStorage.setItem(
+    "puntaPreguntas",
+    JSON.stringify(puntajePreguntas)
+);
+   }
     mostrarResultado();
   }
 });
