@@ -521,11 +521,15 @@ function hacerCaerColumna(columna) {
 // podemos togglear el fondo si puntaje > algun valor especificco
 let puntajeActual = 0;
 let ronda = 0;
-
+let puntajeDadosMax = 0;
 function sumarPuntaje (cantidad) {
     puntajeActual = puntajeActual + (cantidad * 5) * ronda;
     if (ronda===7) {
         puntajeActual = puntajeActual*2
+    }
+    //pensado para cuando exista boton de reinicio
+    if (puntajeActual>puntajeDadosMax){
+        puntajeDadosMax = puntajeActual;
     }
     texto.innerHTML =  `<h2> ${puntajeActual} </h2>`
 }
@@ -540,8 +544,16 @@ function finJuego () {
     if ( cuadricula.length > 5 && cuadricula[5][i]  !==  null  )
         {
             botonTirada.disabled = true;
+            determinarPuntaje();
         } }
 }
+
+
+function determinarPuntaje () {
+localStorage.setItem(
+    "puntaDados",
+    JSON.stringify(puntajeDadosMax)
+);}
 
 const textoInstrucciones = document.getElementById ("textoInstrucciones")
 let weinst = true; 

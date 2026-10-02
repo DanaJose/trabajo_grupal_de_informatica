@@ -94,11 +94,4 @@ function determinarEquipo () {
 localStorage.setItem(
     "colores",
     JSON.stringify(colores)
-);}/*
-
-y para recuperarlos:
-let colores = JSON.parse(
-    localStorage.getItem("colores")
-);
-*/
-
+);}
