@@ -130,7 +130,7 @@ btnSiguiente.addEventListener("click", () => {
    if (puntajeActual>puntaPreguntas){
     localStorage.setItem(
     "puntaPreguntas",
-    JSON.stringify(puntajePreguntas)
+    JSON.stringify(puntaPreguntas)
 );
    }
     mostrarResultado();
