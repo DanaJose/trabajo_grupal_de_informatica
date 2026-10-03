@@ -47,4 +47,4 @@ function reinaPuntajes() {
 } */ 
 
 
-parrafo.innerHTML = `PUNTAJE MAXIMO DADOS: ${equipo.dados[1]} ... PUNTAJE MAXIMO CARTAS: ${equipo.cartas[1]} ... PUNTAJE MAXIMO PREGUNTAS: ${equipo.pregu[1]}`
+parrafo.innerHTML = `PUNTAJE MAXIMO DADOS: ${equipo.dados[0]} ... PUNTAJE MAXIMO CARTAS: ${equipo.cartas[0]} ... PUNTAJE MAXIMO PREGUNTAS: ${equipo.pregu[0]}`
