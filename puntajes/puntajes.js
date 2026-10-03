@@ -22,8 +22,11 @@ let equipoMostrar = {
     cartas: [],
     pregu: []
 };
+// equipo.lenght es la cantidad de equipos o la cantidad de colores que tiene el equipo? cuidemos eso al cambiar el sriptInicio
+console.log(equipo)
+console.log(equipo.length)
 
-for (let i=0 ; i<colores.length; i++){
+for (let i=0 ; i<equipo.length; i++){
     equipoMostrar.colores[i]=equipo[i] ?? 0;
     equipoMostrar.dados[i]=puntaDados[i] ?? 0;
     equipoMostrar.cartas[i]=puntaCartas[i] ?? 0;
