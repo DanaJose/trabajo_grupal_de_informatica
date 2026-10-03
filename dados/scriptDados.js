@@ -570,7 +570,17 @@ let instruccionesTexto = `Este juego consta de dos partes:
 
 El juego termina si una ficha que debe caer rebasa el limite del tablero y "no cae".`
 
-textoInstrucciones.innerHTML = instruccionesTexto;
+let instruccionesparafumados = ` 
+	Al combinar tres figuras idénticas, de forma vertical u horizontal, sumarás puntos y las fichas se esfumarán del tablero.
+¡y cómo combino tres figuras idénticas?
+Verás un bloque rosa, al apretar "tirar dados" aparecerán personajes de Mario Bross.
+Puedes cambiar su posición apretando las flechas entre los personajes.
+Marcá con un click los personajes que quieras mantener en el bloque rosa antes del segundo tiro. Los personajes que no cliquees cambiarán por otros nuevos.
+	
+Al tercer tiro de dados los personajes que están sobre el bloque rosa caerán al tablero de juego, rellenando los espacios disponibles. Si tres son idénticos se esfumarán.
+¡cuidado!
+los personajes iran llenando el tablero de abajo hacia arriba. Si los personajes superan el tablero, el juego terminará.`
+textoInstrucciones.innerHTML = instruccionesparafumados;
 weinst = false;
 } else {
     textoInstrucciones.innerHTML = "";
