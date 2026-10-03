@@ -2,6 +2,7 @@ let resultado = document.querySelector("#resultado");
 let puntajeFinal = document.querySelector("#puntajeFinal");
 let reiniciar = document.querySelector("#reiniciar");
 let mensaje = document.querySelector("#mensaje");
+let puntaCartas = 0;
 
 reiniciar.style.display = "none";
 
@@ -153,10 +154,7 @@ mezclarCartas(cartas);
 
                 contenedorCartas.innerHTML = "";
 
-                if (numero == "princesa") {
-
                 puntaje = puntaje + 500;
-            }
 
                 crearCartas(cartasRonda2);
 
@@ -204,11 +202,7 @@ mezclarCartas(cartas);
                 // Aparece el alert
                 alert("¡Buen trabajo! Mario ha sido encontrado");
 
-                if (numero == "mario") {
-
                 puntaje = puntaje + 500;
-
-            }
 
                 // Desaparecen las cartas
                 contenedorCartas.innerHTML = "";
@@ -256,6 +250,14 @@ mezclarCartas(cartas);
                 // Aparece el puntaje
                 puntajeFinal.innerText =
                     "Tu puntaje es " + puntaje + " puntos";
+
+                // lo llevamos al ranking 
+                if (puntaje>puntaCartas){
+                puntaCartas = puntaje;
+                localStorage.setItem(
+    "puntaCartas",
+    JSON.stringify(puntaCartas)
+);}
 
                 // Aparece reiniciar
                 reiniciar.style.display = "block";
