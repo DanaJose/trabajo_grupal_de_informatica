@@ -8,13 +8,13 @@ let colores = JSON.parse(
 // ahora recuperamos los datos de puntajes de los juegos
 let puntaDados = JSON.parse(
     localStorage.getItem("puntaDados")
-);
+)||[];
 let puntaPreguntas = JSON.parse(
     localStorage.getItem("puntaPreguntas")
-);
+)||[];
 let puntaCartas = JSON.parse(
     localStorage.getItem("puntaCartas")
-);
+)||[];
 
 
 let equipo = {
@@ -25,10 +25,10 @@ let equipo = {
 };
 
 for (let i=0 ; i<colores.length; i++){
-    equipo.color[i]=colores[i];
-    equipo.dados[i]=puntaDados[i];
-    equipo.cartas[i]=puntaCartas[i];
-    equipo.pregu[i]=puntaPreguntas[i];
+    equipo.color[i]=colores[i] ?? 0;
+    equipo.dados[i]=puntaDados[i] ?? 0;
+    equipo.cartas[i]=puntaCartas[i] ?? 0;
+    equipo.pregu[i]=puntaPreguntas[i] ?? 0;
 }
 
 function reinaPuntajes() {
