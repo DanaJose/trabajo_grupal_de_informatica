@@ -6,6 +6,9 @@
 let preguntasActuales = [];
 let indicePreguntaActual = 0;
 let puntajeActual = 0;
+const SEGUNDOS_POR_PREGUNTA = 15;
+let segundosRestantes = SEGUNDOS_POR_PREGUNTA;
+let idIntervaloTimer = null;
  
 // Referencias a elementos del HTML
 const botonesDificultad = document.querySelectorAll(".btn-dificultad");
@@ -19,6 +22,7 @@ const btnSiguiente = document.getElementById("btn-siguiente");
 const puntajeFinalSpan = document.getElementById("puntaje-final");
 const totalPreguntasFinalSpan = document.getElementById("total-preguntas-final");
 const btnJugarDeNuevo = document.getElementById("btn-jugar-de-nuevo");
+const tiempoSpan = document.getElementById("tiempo");
  
 // Muestra una pantalla (inicio, juego o resultado) y oculta las demás
 function mostrarPantalla(idPantalla) {
@@ -30,6 +34,7 @@ function mostrarPantalla(idPantalla) {
  
 // Dibuja en el HTML la pregunta que corresponde al índice actual
 function mostrarPregunta() {
+    iniciarTimer();
   const pregunta = preguntasActuales[indicePreguntaActual];
  
   textoPregunta.textContent = pregunta.texto;
@@ -76,11 +81,12 @@ async function obtenerDatoCurioso(nombrePersonaje) {
  let racha = 0;
 async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
   // Deshabilitamos todos los botones para que no se pueda responder dos veces
+   detenerTimer();
   const todosLosBotones = contenedorOpciones.querySelectorAll("button");
   todosLosBotones.forEach((boton, indice) => {
     boton.disabled = true;
     if (indice === indiceCorrecto) {
-      boton.classList.add("opcion-correcta");
+      boton.classList.add("correcta");
     }
   });
  
@@ -92,9 +98,11 @@ async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
     puntajeActual = puntajeActual + 100*racha;
     puntajeActualSpan.textContent = puntajeActual;
     mensajeFeedback.textContent = "¡Correcto!";
-  } else {
-    botonElegido.classList.add("opcion-incorrecta");
-    mensajeFeedback.textContent = "Incorrecto";
+    } else {
+    if (botonElegido) {
+      botonElegido.classList.add("incorrecta");
+    }
+    mensajeFeedback.textContent = botonElegido ? "Incorrecto" : "¡Se acabó el tiempo!";
     racha = 0;
   }
  
@@ -129,6 +137,33 @@ btnSiguiente.addEventListener("click", () => {
     mostrarResultado();
   }
 });
+
+// Arranca (o reinicia) la cuenta regresiva para la pregunta actual
+function iniciarTimer() {
+  detenerTimer(); // por si quedó uno corriendo de la pregunta anterior
+
+  segundosRestantes = SEGUNDOS_POR_PREGUNTA;
+  tiempoSpan.textContent = segundosRestantes;
+
+  idIntervaloTimer = setInterval(() => {
+    segundosRestantes--;
+    tiempoSpan.textContent = segundosRestantes;
+
+    if (segundosRestantes <= 0) {
+            detenerTimer();
+      const pregunta = preguntasActuales[indicePreguntaActual];
+      verificarRespuesta(-1, pregunta.correcta, null);
+    }
+  }, 1000);
+}
+
+// Frena el intervalo activo, para no acumular varios corriendo a la vez
+function detenerTimer() {
+  if (idIntervaloTimer !== null) {
+    clearInterval(idIntervaloTimer);
+    idIntervaloTimer = null;
+  }
+}
  
 // Muestra la pantalla final con el puntaje obtenido
 function mostrarResultado() {
