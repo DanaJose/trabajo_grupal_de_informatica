@@ -195,5 +195,33 @@ botonesDificultad.forEach(boton => {
     mostrarPregunta();
   });
 });
+
+// Aca guarda el puntaje de record por bandera
+function guardarPuntajeSiEsRecord() {
+  // 1. Identificamos qué equipo está jugando ahora
+  const equipo = JSON.parse(localStorage.getItem("equipo"));
+  if (!equipo) {
+    console.log("No hay equipo elegido, no se guarda el puntaje.");
+    return;
+  }
+  const claveEquipo = JSON.stringify(equipo);
+
+  // 2. Leemos los récords ya guardados (o un objeto vacío si es la primera vez)
+  const todosLosRecords = JSON.parse(localStorage.getItem("puntaPreguntas")) || {};
+
+  // 3. Comparamos contra el récord anterior de ESTE equipo
+  const recordAnterior = todosLosRecords[claveEquipo];
+
+  if (!recordAnterior || puntajeActual > recordAnterior.puntaje) {
+    todosLosRecords[claveEquipo] = {
+      puntaje: puntajeActual,
+      fecha: new Date().toLocaleDateString("es-AR")
+    };
+    localStorage.setItem("puntaPreguntas", JSON.stringify(todosLosRecords));
+    console.log("¡Nuevo récord guardado para este equipo!", todosLosRecords[claveEquipo]);
+  } else {
+    console.log("No superó el récord anterior:", recordAnterior);
+  }
+}
  
  

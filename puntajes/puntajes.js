@@ -1,8 +1,7 @@
 //colores recupera los colores seleccionados x el usuario
-let colores = JSON.parse(
-    localStorage.getItem("colores")
+let equipo = JSON.parse(
+    localStorage.getItem("equipo")
 );
-
 
 // ahora recuperamos los datos de puntajes de los juegos
 let puntaDados = JSON.parse(
@@ -17,5 +16,5 @@ let puntaCartas = JSON.parse(
 
 
 console.log (localStorage.getItem("colores"))
-console.log (colores)
+console.log (equipoo)
 console.log (puntaDados)

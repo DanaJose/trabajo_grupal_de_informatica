@@ -75,9 +75,8 @@ if (confirmar.disabled != true) {
 
 confirmar.addEventListener("click", function() {
 
-    let equipo = determinarEquipo();
-
-    localStorage.setItem("equipo", equipo);
+        let equipo = determinarEquipo();
+    localStorage.setItem("equipo", JSON.stringify(equipo));
 banderita.classList.add("bloqueado");
     contenido.classList.remove("bloqueado");
     contenidoHead.classList.remove("bloqueado");
@@ -90,8 +89,7 @@ banderita.classList.add("bloqueado");
 });
 
 //luego en los juegos: let equipo = localStorage.getItem("equipo");
-function determinarEquipo () {
-localStorage.setItem(
-    "colores",
-    JSON.stringify(colores)
-);}
+function determinarEquipo() {
+    const patron = Array.from(casillas).map(casilla => casilla.style.backgroundColor);
+    return patron;
+}
