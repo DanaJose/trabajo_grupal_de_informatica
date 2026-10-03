@@ -6,13 +6,10 @@
 let preguntasActuales = [];
 let indicePreguntaActual = 0;
 let puntajeActual = 0;
-<<<<<<< HEAD
 const SEGUNDOS_POR_PREGUNTA = 15;
 let segundosRestantes = SEGUNDOS_POR_PREGUNTA;
 let idIntervaloTimer = null;
-=======
 let puntaPreguntas = 0;
->>>>>>> d2bab16779f4d7c174f94de1219405be488a7ce8
  
 // Referencias a elementos del HTML
 const botonesDificultad = document.querySelectorAll(".btn-dificultad");
