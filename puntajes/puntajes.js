@@ -16,11 +16,6 @@ let puntaCartas = JSON.parse(
 )||[];
 
 
-<<<<<<< HEAD
-console.log (localStorage.getItem("colores"))
-console.log (equipoo)
-console.log (puntaDados)
-=======
 let equipo = {
     color: [],
     dados: [],
@@ -52,4 +47,3 @@ function reinaPuntajes() {
 
 
 parrafo.innerHTML = `PUNTAJE MAXIMO DADOS: ${equipo.dados[0]} ... PUNTAJE MAXIMO CARTAS: ${equipo.cartas[0]} ... PUNTAJE MAXIMO PREGUNTAS: ${equipo.pregu[0]}`
->>>>>>> d2bab16779f4d7c174f94de1219405be488a7ce8
