@@ -1,3 +1,4 @@
+const parrafo = document.getElementById("puntajes");
 //colores recupera los colores seleccionados x el usuario
 let colores = JSON.parse(
     localStorage.getItem("colores")
@@ -16,6 +17,34 @@ let puntaCartas = JSON.parse(
 );
 
 
-console.log (localStorage.getItem("colores"))
-console.log (colores)
-console.log (puntaDados)
+let equipo = {
+    color: [],
+    dados: [],
+    cartas: [],
+    pregu: []
+};
+
+for (let i=0 ; i<colores.length; i++){
+    equipo.color[i]=colores[i];
+    equipo.dados[i]=puntaDados[i];
+    equipo.cartas[i]=puntaCartas[i];
+    equipo.pregu[i]=puntaPreguntas[i];
+}
+
+function reinaPuntajes() {
+    localStorage.clear();
+location.reload();
+}
+// quizas tambien borrar algun puntaje en particular?
+// podria armarse un boton cuando ya este definido html y css
+/* declaracion de IA: CHAT GPT me sugirio no perder todos los datos, mejor usar
+function reinaPuntajes() {
+    localStorage.removeItem("puntaDados");
+    localStorage.removeItem("puntaPreguntas");
+    localStorage.removeItem("puntaCartas");
+
+    location.reload();
+} */ 
+
+
+parrafo.innerHTML = `PUNTAJE MAXIMO DADOS: ${equipo.dados[1]} ... PUNTAJE MAXIMO CARTAS: ${equipo.cartas[1]} ... PUNTAJE MAXIMO PREGUNTAS: ${equipo.pregu[1]}`
