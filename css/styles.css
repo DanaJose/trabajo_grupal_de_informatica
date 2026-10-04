@@ -508,18 +508,7 @@ section a button:hover {
     border-collapse: collapse;
 }
 
-.mini-bandera {
-    display: grid;
-    grid-template-columns: repeat(3, 20px);
-    grid-template-rows: repeat(3, 20px);
-    gap: 2px;
-    margin: 0 auto;
-    width: fit-content;
-}
 
-.mini-bandera div {
-    border: 1px solid black;
-}
  
 #tabla-equipos th,
 #tabla-equipos td {
