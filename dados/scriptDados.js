@@ -190,10 +190,12 @@ botonTirada.addEventListener("click", () => {
 
     finJuego ();
 
-    tirarDados();
+    // Evitamos otra tirada mientras se está animando
+    botonTirada.disabled = true;
 
     numeroTiradas++;
 
+    animarTirada();
     mostrarDados();
 
     comprobarFinDeTirada();
