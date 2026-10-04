@@ -546,6 +546,11 @@ function finJuego () {
 			return;
         } }
 	 botonTirada.disabled = false;
+	 texto.innerHTML =  `Tu puntaje actual es: <h2> ${puntajeActual} </h2> 
+						<div>
+ <a href="../puntajes/puntajes.html" class="enlace-puntajes">Ver tabla de puntajes</a>
+<button onClick="window.location.reload();" class="enlace-puntajes">Jugar de Nuevo</button>
+</div>	 `
 }
 
 
@@ -564,7 +569,7 @@ function determinarPuntaje() {
   if (!recordAnterior || puntajeActual > recordAnterior.puntaje) {
     todosLosRecords[claveEquipo] = {
       puntaje: puntajeActual,
-      fecha: new Date().toLocaleDateString("es-AR")
+      //fecha: new Date().toLocaleDateString("es-AR")
     };
     localStorage.setItem("puntaDados", JSON.stringify(todosLosRecords));
     console.log("¡Nuevo récord de dados guardado para este equipo!", todosLosRecords[claveEquipo]);
