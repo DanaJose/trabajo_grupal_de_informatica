@@ -12,7 +12,7 @@ function generarMiniBandera(colores) {
 }
  
 // Junta los récords de los tres juegos y arma una fila por cada equipo
-// que haya jugado al menos uno de ellos.
+// que haya jugado al menos uno de ellos
 function mostrarTablaEquipos() {
   const puntaCartas = JSON.parse(localStorage.getItem("puntaCartas")) || {};
   const puntaDados = JSON.parse(localStorage.getItem("puntaDados")) || {};

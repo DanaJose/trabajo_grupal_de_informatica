@@ -6,7 +6,7 @@
 let preguntasActuales = [];
 let indicePreguntaActual = 0;
 let puntajeActual = 0;
-const SEGUNDOS_POR_PREGUNTA = 15;
+const SEGUNDOS_POR_PREGUNTA = 7;
 let segundosRestantes = SEGUNDOS_POR_PREGUNTA;
 let idIntervaloTimer = null;
  

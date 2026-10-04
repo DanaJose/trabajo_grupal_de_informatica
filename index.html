@@ -131,6 +131,34 @@
         </div>
     </main>
 
+    <button id="btnPrueba">Hacer sonar</button>
+
+<script>
+  // 1. Creamos el sonido.
+  // "new Audio" crea un reproductor invisible y le dice qué archivo usar.
+  // Todavía no suena nada: solo queda cargado y listo para usarse.
+  // La ruta empieza en "sonidos/" porque index.html está en la raíz del proyecto,
+  // al lado de la carpeta "sonidos".
+  const sonidoConfirmar = new Audio("sonidos/sonido_1.mp3");
+
+  // 2. Buscamos el botón en la página.
+  // getElementById busca el elemento que tenga id="confirmar" en el HTML,
+  // o sea, tu botón "CONFIRMAR EQUIPO". Lo guardamos en una variable
+  // para poder decirle qué hacer.
+  const botonConfirmar = document.getElementById("confirmar");
+
+  // 3. Le decimos al botón que escuche los clics.
+  // addEventListener significa: "quedate atento a este evento".
+  // "click" es el evento que esperamos.
+  // La función de adentro es lo que se ejecuta cada vez que alguien hace clic.
+  botonConfirmar.addEventListener("click", function () {
+
+    // 4. Reproducimos el sonido.
+    // play() le ordena al reproductor que empiece a sonar.
+    sonidoConfirmar.play();
+  });
+</script>
+
 
     <footer>
         Trabajo Práctico de Informática 1 - Universidad Nacional de las Artes -
