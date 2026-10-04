@@ -9,7 +9,6 @@ let puntajeActual = 0;
 const SEGUNDOS_POR_PREGUNTA = 15;
 let segundosRestantes = SEGUNDOS_POR_PREGUNTA;
 let idIntervaloTimer = null;
-let puntaPreguntas = 0;
  
 // Referencias a elementos del HTML
 const botonesDificultad = document.querySelectorAll(".btn-dificultad");
@@ -35,7 +34,7 @@ function mostrarPantalla(idPantalla) {
  
 // Dibuja en el HTML la pregunta que corresponde al índice actual
 function mostrarPregunta() {
-    iniciarTimer();
+  iniciarTimer();
   const pregunta = preguntasActuales[indicePreguntaActual];
  
   textoPregunta.textContent = pregunta.texto;
@@ -61,7 +60,7 @@ function mostrarPregunta() {
   });
 }
  
-// Trae un dato curioso desde mariowiki.com (Fandom / MediaWiki API)
+// Trae un dato curioso desde mariowiki.com (MediaWiki API)
 async function obtenerDatoCurioso(nombrePersonaje) {
   const url = `https://www.mariowiki.com/api.php?action=query&prop=extracts&exintro&explaintext&titles=${encodeURIComponent(nombrePersonaje)}&format=json&origin=*`;
  
@@ -79,10 +78,11 @@ async function obtenerDatoCurioso(nombrePersonaje) {
 }
  
 // Valida si la opción elegida es correcta, actualiza puntaje y muestra feedback
- let racha = 0;
+let racha = 0;
 async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
+  detenerTimer();
+ 
   // Deshabilitamos todos los botones para que no se pueda responder dos veces
-   detenerTimer();
   const todosLosBotones = contenedorOpciones.querySelectorAll("button");
   todosLosBotones.forEach((boton, indice) => {
     boton.disabled = true;
@@ -93,13 +93,13 @@ async function verificarRespuesta(indiceElegido, indiceCorrecto, botonElegido) {
  
   const esCorrecta = indiceElegido === indiceCorrecto;
   const pregunta = preguntasActuales[indicePreguntaActual];
-
+ 
   if (esCorrecta) {
     racha++;
-    puntajeActual = puntajeActual + 100*racha;
+    puntajeActual = puntajeActual + 100 * racha;
     puntajeActualSpan.textContent = puntajeActual;
     mensajeFeedback.textContent = "¡Correcto!";
-    } else {
+  } else {
     if (botonElegido) {
       botonElegido.classList.add("incorrecta");
     }
@@ -135,35 +135,29 @@ btnSiguiente.addEventListener("click", () => {
   if (indicePreguntaActual < preguntasActuales.length) {
     mostrarPregunta();
   } else {
-   if (puntajeActual>puntaPreguntas){
-    localStorage.setItem(
-    "puntaPreguntas",
-    JSON.stringify(puntaPreguntas)
-);
-   }
     mostrarResultado();
   }
 });
-
+ 
 // Arranca (o reinicia) la cuenta regresiva para la pregunta actual
 function iniciarTimer() {
   detenerTimer(); // por si quedó uno corriendo de la pregunta anterior
-
+ 
   segundosRestantes = SEGUNDOS_POR_PREGUNTA;
   tiempoSpan.textContent = segundosRestantes;
-
+ 
   idIntervaloTimer = setInterval(() => {
     segundosRestantes--;
     tiempoSpan.textContent = segundosRestantes;
-
+ 
     if (segundosRestantes <= 0) {
-            detenerTimer();
+      detenerTimer();
       const pregunta = preguntasActuales[indicePreguntaActual];
       verificarRespuesta(-1, pregunta.correcta, null);
     }
   }, 1000);
 }
-
+ 
 // Frena el intervalo activo, para no acumular varios corriendo a la vez
 function detenerTimer() {
   if (idIntervaloTimer !== null) {
@@ -176,6 +170,7 @@ function detenerTimer() {
 function mostrarResultado() {
   puntajeFinalSpan.textContent = puntajeActual;
   totalPreguntasFinalSpan.textContent = preguntasActuales.length;
+  guardarPuntajeSiEsRecord();
   mostrarPantalla("pantalla-resultado");
 }
  
@@ -202,23 +197,19 @@ botonesDificultad.forEach(boton => {
     mostrarPregunta();
   });
 });
-
-// Aca guarda el puntaje de record por bandera
+ 
+// Guarda el puntaje como récord por bandera, solo si supera el anterior
 function guardarPuntajeSiEsRecord() {
-  // 1. Identificamos qué equipo está jugando ahora
   const equipo = JSON.parse(localStorage.getItem("equipo"));
   if (!equipo) {
     console.log("No hay equipo elegido, no se guarda el puntaje.");
     return;
   }
   const claveEquipo = JSON.stringify(equipo);
-
-  // 2. Leemos los récords ya guardados (o un objeto vacío si es la primera vez)
+ 
   const todosLosRecords = JSON.parse(localStorage.getItem("puntaPreguntas")) || {};
-
-  // 3. Comparamos contra el récord anterior de ESTE equipo
   const recordAnterior = todosLosRecords[claveEquipo];
-
+ 
   if (!recordAnterior || puntajeActual > recordAnterior.puntaje) {
     todosLosRecords[claveEquipo] = {
       puntaje: puntajeActual,
@@ -230,5 +221,4 @@ function guardarPuntajeSiEsRecord() {
     console.log("No superó el récord anterior:", recordAnterior);
   }
 }
- 
  

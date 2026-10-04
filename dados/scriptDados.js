@@ -551,11 +551,28 @@ function finJuego () {
 }
 
 
-function determinarPuntaje () {
-localStorage.setItem(
-    "puntaDados",
-    JSON.stringify(puntajeDadosMax)
-);}
+function determinarPuntaje() {
+  const equipo = JSON.parse(localStorage.getItem("equipo"));
+  if (!equipo) {
+    console.log("No hay equipo elegido, no se guarda el puntaje.");
+    return;
+  }
+  const claveEquipo = JSON.stringify(equipo);
+
+  const todosLosRecords = JSON.parse(localStorage.getItem("puntaDados")) || {};
+  const recordAnterior = todosLosRecords[claveEquipo];
+
+  if (!recordAnterior || puntajeDadosMax > recordAnterior.puntaje) {
+    todosLosRecords[claveEquipo] = {
+      puntaje: puntajeDadosMax,
+      fecha: new Date().toLocaleDateString("es-AR")
+    };
+    localStorage.setItem("puntaDados", JSON.stringify(todosLosRecords));
+    console.log("¡Nuevo récord de dados guardado para este equipo!", todosLosRecords[claveEquipo]);
+  } else {
+    console.log("No superó el récord anterior de dados:", recordAnterior);
+  }
+}
 
 const textoInstrucciones = document.getElementById ("textoInstrucciones")
 let weinst = true; 

@@ -4,6 +4,33 @@ let reiniciar = document.querySelector("#reiniciar");
 let mensaje = document.querySelector("#mensaje");
 let puntaCartas = 0;
 
+// Puntajes
+// Agregue esta parte para que tenga coincidencia con todos los demás juegos, probala y me decís
+// Te la dejo así de visible pa que sepas que hice este agregado
+
+function guardarPuntajeCartas() {
+  const equipo = JSON.parse(localStorage.getItem("equipo"));
+  if (!equipo) {
+    console.log("No hay equipo elegido, no se guarda el puntaje.");
+    return;
+  }
+  const claveEquipo = JSON.stringify(equipo);
+
+  const todosLosRecords = JSON.parse(localStorage.getItem("puntaCartas")) || {};
+  const recordAnterior = todosLosRecords[claveEquipo];
+
+  if (!recordAnterior || puntaje > recordAnterior.puntaje) {
+    todosLosRecords[claveEquipo] = {
+      puntaje: puntaje,
+      fecha: new Date().toLocaleDateString("es-AR")
+    };
+    localStorage.setItem("puntaCartas", JSON.stringify(todosLosRecords));
+    console.log("¡Nuevo récord de cartas guardado para este equipo!", todosLosRecords[claveEquipo]);
+  } else {
+    console.log("No superó el récord anterior de cartas:", recordAnterior);
+  }
+}
+
 reiniciar.style.display = "none";
 
 let puntaje = 0;
@@ -252,12 +279,9 @@ mezclarCartas(cartas);
                     "Tu puntaje es " + puntaje + " puntos";
 
                 // lo llevamos al ranking 
-                if (puntaje>puntaCartas){
-                puntaCartas = puntaje;
-                localStorage.setItem(
-    "puntaCartas",
-    JSON.stringify(puntaCartas)
-);}
+                // Acá también te agregue texto
+                                 
+                guardarPuntajeCartas();
 
                 // Aparece reiniciar
                 reiniciar.style.display = "block";
