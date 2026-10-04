@@ -1,4 +1,4 @@
-* ========================================
+/* ========================================
    BASE — fondo compartido por todo el sitio
    ======================================== */
  
@@ -36,11 +36,16 @@ h1 {
     text-shadow: 4px 4px 0px #000;
 }
  
+footer {
+    text-align: center;
+    padding: 15px;
+}
+ 
 /* ========================================
    NOSOTRXS
    ======================================== */
  
-main section.pagina-nosotrxs {
+.pagina-nosotrxs {
     background-color: rgb(249, 238, 238);
     border: 4px solid black;
     border-radius: 15px;
@@ -184,6 +189,8 @@ main section.pagina-nosotrxs {
     align-items: center;
     gap: 12px;
     justify-content: center;
+    max-width: 700px;
+    margin: 20px auto;
 }
  
 .dados div {
@@ -200,6 +207,8 @@ main section.pagina-nosotrxs {
     align-items: center;
     gap: 12px;
     justify-content: center;
+    max-width: 450px;
+    margin: 0 auto;
 }
  
 .tablero article {
@@ -256,7 +265,8 @@ main section.pagina-nosotrxs {
     gap: 20px;
 }
  
-.globo-dialogo {
+.globo-dialogo,
+#instrucciones-bandera {
     background: white;
     border: 4px solid black;
     border-radius: 20px;
@@ -264,6 +274,10 @@ main section.pagina-nosotrxs {
     max-width: 480px;
     text-align: left;
     position: relative;
+}
+
+#instrucciones-bandera {
+    margin: 20px auto;
 }
  
 .titulo-globo {
@@ -283,7 +297,9 @@ main section.pagina-nosotrxs {
     margin-top: 10px;
 }
  
-.btn-dificultad {
+.btn-dificultad,
+#confirmar,
+.btn-instrucciones {
     background: white;
     border: 3px solid black;
     border-radius: 30px;
@@ -293,7 +309,9 @@ main section.pagina-nosotrxs {
     cursor: pointer;
 }
  
-.btn-dificultad:hover {
+.btn-dificultad:hover,
+#confirmar:hover,
+.btn-instrucciones:hover {
     background-color: #ffd54f;
     transform: scale(1.05);
 }
@@ -428,6 +446,24 @@ main section.pagina-nosotrxs {
     margin: 0 auto;
 }
  
+#confirmar {
+    display: block;
+    margin: 20px auto;
+}
+
+.fila-equipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.texto-eleccion {
+    flex: 1;
+}
+ 
 .puzzle {
     width: 300px;
     height: 300px;
@@ -448,10 +484,24 @@ main section.pagina-nosotrxs {
     display: none;
 }
  
+.btn-instrucciones {
+    display: block;
+    margin: 20px auto;
+}
+ 
+#tirada {
+    display: block;
+    margin: 20px auto;
+}
+ 
 #textoInstrucciones {
-    color: yellow;
-    text-shadow: 1px 1px #000;
-    font-size: 18px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 4px solid green;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 600px;
+    margin: 20px auto;
     white-space: pre-wrap;
     text-align: justify;
 }
@@ -507,8 +557,6 @@ section a button:hover {
     width: 100%;
     border-collapse: collapse;
 }
-
-
  
 #tabla-equipos th,
 #tabla-equipos td {
