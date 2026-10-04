@@ -1,6 +1,15 @@
 // ========================================
 // PÁGINA DE PUNTAJES — Tabla de posiciones
 // ========================================
+
+// Se incorpora la bandera de los equipos, pero más pequeña
+// Si no le cambiamos los nueve colores sugiero cambiarle el tamaño ya que esta muy amplia
+function generarMiniBandera(colores) {
+  const cuadraditos = colores
+    .map(color => `<div style="background-color: ${color};"></div>`)
+    .join("");
+  return `<div class="mini-bandera">${cuadraditos}</div>`;
+}
  
 // Junta los récords de los tres juegos y arma una fila por cada equipo
 // que haya jugado al menos uno de ellos.
@@ -24,19 +33,18 @@ function mostrarTablaEquipos() {
     return;
   }
  
-  todasLasClaves.forEach(clave => {
+    todasLasClaves.forEach(clave => {
     const colores = JSON.parse(clave); // volvemos el string a array de colores
- 
+
     const fila = document.createElement("tr");
     fila.innerHTML = `
-      <td>${colores.join(", ")}</td>
+      <td>${generarMiniBandera(colores)}</td>
       <td>${puntaCartas[clave]?.puntaje ?? "-"}</td>
       <td>${puntaDados[clave]?.puntaje ?? "-"}</td>
       <td>${puntaPreguntas[clave]?.puntaje ?? "-"}</td>
     `;
     cuerpoTabla.appendChild(fila);
   });
-}
  
 mostrarTablaEquipos();
  
