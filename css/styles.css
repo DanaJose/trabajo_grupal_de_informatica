@@ -1,7 +1,7 @@
-/* ========================================
+* ========================================
    BASE — fondo compartido por todo el sitio
    ======================================== */
-
+ 
 body {
     margin: 4cqmax;
     background-image: url("../cartas/img/fondo_cartas.png");
@@ -10,36 +10,36 @@ body {
     background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
-
+ 
 nav {
     background-image: url("../cartas/img/nav.png");
     background-color: rgba(0, 0, 0, 0.7);
     padding: 15px;
     text-align: center;
 }
-
+ 
 nav a {
     color: white;
     text-decoration: none;
     font-size: 20px;
     margin: 0 15px;
 }
-
+ 
 nav a:hover {
     text-decoration: underline;
 }
-
+ 
 h1 {
     text-align: center;
     font-size: 45px;
     color: rgb(225, 58, 58);
     text-shadow: 4px 4px 0px #000;
 }
-
+ 
 /* ========================================
    NOSOTRXS
    ======================================== */
-
+ 
 main section.pagina-nosotrxs {
     background-color: rgb(249, 238, 238);
     border: 4px solid black;
@@ -49,11 +49,11 @@ main section.pagina-nosotrxs {
     max-width: 800px;
     box-sizing: border-box;
 }
-
+ 
 /* ========================================
    JUEGO DE CARTAS
    ======================================== */
-
+ 
 /* Contenedor de las cartas */
 #cartas {
     display: flex;
@@ -63,7 +63,7 @@ main section.pagina-nosotrxs {
     max-width: 1000px;
     margin: 30px auto;
 }
-
+ 
 /* Cada carta */
 #cartas button {
     width: 150px;
@@ -74,14 +74,14 @@ main section.pagina-nosotrxs {
     overflow: hidden;
     cursor: pointer;
 }
-
+ 
 /* Imagen de la carta */
 #cartas img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
+ 
 /* Tiempo */
 #tiempo {
     position: fixed;
@@ -90,7 +90,7 @@ main section.pagina-nosotrxs {
     font-size: 30px;
     font-weight: bold;
 }
-
+ 
 #reiniciar {
     background-color: #e63946;
     color: white;
@@ -101,11 +101,11 @@ main section.pagina-nosotrxs {
     font-weight: bold;
     cursor: pointer;
 }
-
+ 
 #reiniciar:hover {
     transform: scale(1.05);
 }
-
+ 
 #mensaje {
     text-align: center;
     color: white;
@@ -115,7 +115,7 @@ main section.pagina-nosotrxs {
     width: fit-content;
     margin: 20px auto;
 }
-
+ 
 #temporizador {
     position: fixed;
     top: 20px;
@@ -128,7 +128,7 @@ main section.pagina-nosotrxs {
     font-weight: bold;
     border-radius: 8px;
 }
-
+ 
 #puntajeFinal {
     color: white;
     font-size: 25px;
@@ -136,7 +136,7 @@ main section.pagina-nosotrxs {
     text-align: center;
     margin: 20px;
 }
-
+ 
 #resultado {
     color: white;
     font-size: 32px;
@@ -145,12 +145,12 @@ main section.pagina-nosotrxs {
     text-shadow: 3px 3px 0px black;
     position: relative;
 }
-
+ 
 /* Animación de corazones al formar pareja (agregado por la compañera) */
 .pareja {
     width: 300px;
 }
-
+ 
 .corazon {
     position: absolute;
     left: 50%;
@@ -158,25 +158,25 @@ main section.pagina-nosotrxs {
     font-size: 30px;
     animation: subir 6s ease-out forwards;
 }
-
+ 
 @keyframes subir {
     0% {
         transform: translate(0, 0);
         opacity: 6;
     }
-
+ 
     100% {
         transform: translate(var(--x), var(--y));
         opacity: 0;
     }
 }
-
+ 
 /* ========================================
    JUEGO DE DADOS
    ======================================== */
-
+ 
 /*#tirada {}  aqui para ponerle onda al boton de tirada  */
-
+ 
 .dados {
     display: flex;
     background-image: url("../cartas/img/nav.png");
@@ -185,14 +185,14 @@ main section.pagina-nosotrxs {
     gap: 12px;
     justify-content: center;
 }
-
+ 
 .dados div {
     height: 60px;
     width: 60px;
     background-color: white;
     padding: 3px;
 }
-
+ 
 .tablero {
     display: flex;
     flex-direction: column;
@@ -201,7 +201,7 @@ main section.pagina-nosotrxs {
     gap: 12px;
     justify-content: center;
 }
-
+ 
 .tablero article {
     display: inline-flex;
     height: 60px;
@@ -212,22 +212,22 @@ main section.pagina-nosotrxs {
     align-items: center;
     gap: 12px;
 }
-
+ 
 .tablero article div {
     display: inline-flex;
     flex-direction: row;
     height: 60px;
     width: 60px;
 }
-
+ 
 .dado-seleccionado {
     border: 3px solid red;
 }
-
+ 
 /* ========================================
    JUEGO DE PREGUNTAS (Mario)
    ======================================== */
-
+ 
 /* Control genérico de qué pantalla se muestra (inicio / juego / resultado) */
 .pantalla {
     display: none;
@@ -238,15 +238,15 @@ main section.pagina-nosotrxs {
     min-height: 500px;
     padding: 40px 20px;
 }
-
+ 
 .pantalla.activa {
     display: flex;
 }
-
+ 
 .oculta {
     display: none !important;
 }
-
+ 
 /* --- Pantalla de inicio / selección de dificultad --- */
 #pantalla-inicio {
     flex-direction: row;
@@ -255,7 +255,7 @@ main section.pagina-nosotrxs {
     margin: 0 auto;
     gap: 20px;
 }
-
+ 
 .globo-dialogo {
     background: white;
     border: 4px solid black;
@@ -265,24 +265,24 @@ main section.pagina-nosotrxs {
     text-align: left;
     position: relative;
 }
-
+ 
 .titulo-globo {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 10px;
 }
-
+ 
 .selector-dificultad {
     margin-top: 20px;
 }
-
+ 
 .botones-dificultad {
     display: flex;
     gap: 15px;
     justify-content: center;
     margin-top: 10px;
 }
-
+ 
 .btn-dificultad {
     background: white;
     border: 3px solid black;
@@ -292,24 +292,24 @@ main section.pagina-nosotrxs {
     font-weight: bold;
     cursor: pointer;
 }
-
+ 
 .btn-dificultad:hover {
     background-color: #ffd54f;
     transform: scale(1.05);
 }
-
+ 
 .ilustracion-mario {
     max-width: 400px;
     height: auto;
 }
-
+ 
 /* --- Pantalla de juego en curso --- */
 #pantalla-juego {
     max-width: 700px;
     margin: 0 auto;
     width: 100%;
 }
-
+ 
 .info-partida {
     display: flex;
     justify-content: space-between;
@@ -319,7 +319,7 @@ main section.pagina-nosotrxs {
     text-shadow: 2px 2px 0 black;
     margin-bottom: 20px;
 }
-
+ 
 .tarjeta-pregunta {
     background: white;
     border: 4px solid black;
@@ -327,19 +327,19 @@ main section.pagina-nosotrxs {
     padding: 30px;
     width: 100%;
 }
-
+ 
 #texto-pregunta {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+ 
 .opciones-respuesta {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-
+ 
 .opciones-respuesta button {
     background: #f1f1f1;
     border: 3px solid black;
@@ -348,41 +348,41 @@ main section.pagina-nosotrxs {
     font-size: 16px;
     cursor: pointer;
 }
-
+ 
 .opciones-respuesta button:hover {
     background: #ffd54f;
 }
-
+ 
 /* Estas clases las agrega el JS al validar la respuesta */
 .opciones-respuesta button.correcta {
     background: #a5d6a7;
     border-color: green;
 }
-
+ 
 .opciones-respuesta button.incorrecta {
     background: #ef9a9a;
     border-color: red;
 }
-
+ 
 .opciones-respuesta button:disabled {
     cursor: not-allowed;
     opacity: 0.85;
 }
-
+ 
 .mensaje-feedback {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
 }
-
+ 
 .mensaje-feedback.correcto {
     color: #2e7d32;
 }
-
+ 
 .mensaje-feedback.incorrecto {
     color: #c62828;
 }
-
+ 
 #btn-siguiente,
 #btn-jugar-de-nuevo {
     background-color: #e63946;
@@ -395,50 +395,39 @@ main section.pagina-nosotrxs {
     cursor: pointer;
     margin-top: 20px;
 }
-
+ 
 #btn-siguiente:hover,
 #btn-jugar-de-nuevo:hover {
     transform: scale(1.05);
 }
-
+ 
 /* --- Pantalla de resultado final --- */
 #pantalla-resultado h2 {
     color: white;
     text-shadow: 3px 3px 0 black;
 }
-
+ 
 .enlace-puntajes {
     color: white;
     text-decoration: underline;
     margin-top: 15px;
     display: inline-block;
 }
-
+ 
 /* ========================================
-   PUNTAJES — INCOMPLETO
+   PUNTAJES
    ======================================== */
-
+ 
 #puzzle {
     width: 250px;
     margin: 0 auto;
 }
-
+ 
 #colorEquipo {
     width: 250px;
     margin: 0 auto;
 }
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-}
-
+ 
 .puzzle {
     width: 300px;
     height: 300px;
@@ -449,16 +438,16 @@ body {
     text-align: center;
     justify-content: center;
 }
-
+ 
 .casilla {
     border: 1px solid black;
     cursor: pointer;
 }
-
+ 
 .bloqueado {
     display: none;
 }
-
+ 
 #textoInstrucciones {
     color: yellow;
     text-shadow: 1px 1px #000;
@@ -466,7 +455,7 @@ body {
     white-space: pre-wrap;
     text-align: justify;
 }
-
+ 
 .boton-concentrico {
     width: 100px;
     height: 100px;
@@ -482,57 +471,51 @@ body {
     /* Segundo círculo concéntrico: cambiá el 10px para ajustar la separación */
     box-shadow: inset 0 0 0 10px #FFB200;
 }
-
+ 
 .boton-concentrico:hover {
     transform: scale(1.05);
     background-color: #FEE75C;
 }
-
-<<<<<<< HEAD
- .boton-concentrico {
-            /* Dimensiones del círculo exterior */
-            width: 100px;
-            height: 100px;
-            background-color: #FFDE4D; /* Amarillo principal */
-            border: none;
-            border-radius: 50%; /* Hace que sea completamente redondo */
-            
-            /* Centrado interno y propiedades de pantalla */
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-
-            /* Efecto de segundo círculo concéntrico usando sombra interna */
-            /* Cambia el '15px' para ajustar la separación del círculo interno */
-            box-shadow: inset 0 0 0 10px #FFB200; 
-        }
-
-        /* Efecto visual al pasar el cursor (opcional) */
-        .boton-concentrico:hover {
-            transform: scale(1.05);
-            background-color: #FEE75C;
-        }
-
-        .boton-concentrico:active {
-            transform: scale(0.95);
-        }
-section a button {
-padding: 10px 20px;
-font-size: 16px;
-font-weight: bold;
-cursor: pointer;
-border: none;
-border-radius: 8px;
-}
-
-section a button:hover {
-transform: scale(1.05);
-}
-=======
+ 
 .boton-concentrico:active {
     transform: scale(0.95);
 }
->>>>>>> 541f07fe6fd9b9393c883b051d225fc636207d38
+ 
+section a button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+}
+ 
+section a button:hover {
+    transform: scale(1.05);
+}
+ 
+#tabla-puntajes {
+    background-color: white;
+    border: 4px solid black;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 25px auto;
+    max-width: 700px;
+}
+ 
+#tabla-equipos {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+#tabla-equipos th,
+#tabla-equipos td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
+ 
+#tabla-equipos th {
+    background-color: #ffd54f;
+}
+ 
