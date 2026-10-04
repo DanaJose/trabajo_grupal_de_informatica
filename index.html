@@ -175,6 +175,19 @@
       // En este caso, frena el cambio de página del enlace <a>.
       evento.preventDefault();
 
+            // Frenamos el cambio de página automático (esto ya lo tenías).
+      evento.preventDefault();
+
+      // --- NUEVO ---
+      // pause() detiene la música de fondo en el momento del clic,
+      // así solo se escucha el efecto del botón.
+      // "musicaFondo" se creó en scriptInicio.js. Podemos usarla acá
+      // porque los scripts de una misma página comparten sus variables,
+      // y este código recién se ejecuta al hacer clic, cuando
+      // scriptInicio.js ya cargó.
+      musicaFondo.pause();
+      // --- FIN DE LO NUEVO ---
+
       // Esta línea escribe un mensaje en la consola del navegador.
       // Sirve para comprobar que el código realmente se está ejecutando
       // cuando hacemos clic. No cambia nada de lo que ve el usuario.

@@ -50,6 +50,13 @@ let cuadricula = [];
 // ============================================================
 
 const botonTirada = document.getElementById("tirada");
+// Creamos el sonido que suena al tirar los dados.
+// "new Audio" crea un reproductor invisible con ese archivo.
+// Todavía no suena: solo queda preparado.
+// La ruta lleva "../" porque dados.html está dentro de la carpeta "dados"
+// y "sonidos" está afuera, en la raíz del proyecto.
+// Podés cambiar el archivo por el que prefieras.
+const sonidoTirada = new Audio("../sonidos/sonido_1.mp3");
 
 const dadosHTML = [
     document.getElementById("dado1"),
@@ -185,6 +192,13 @@ intercambios.forEach((boton, i) => {
 // ============================================================
 
 botonTirada.addEventListener("click", () => {
+
+    // Volvemos el sonido al principio, por si todavía estaba sonando.
+    sonidoTirada.currentTime = 0;
+
+    // Reproducimos el sonido de tirar los dados.
+    sonidoTirada.play();
+
     // Evitamos otra tirada mientras se está animando
     botonTirada.disabled = true;
 
@@ -195,7 +209,6 @@ botonTirada.addEventListener("click", () => {
 
     comprobarFinDeTirada();
 });
-
 
 // ============================================================
 // 10. COMPROBAR SI TERMINÓ LA RONDA
