@@ -185,11 +185,6 @@ intercambios.forEach((boton, i) => {
 // ============================================================
 
 botonTirada.addEventListener("click", () => {
-
-    //colocamos fin juego antes para permitir que valgan los puntos de la ultima jugada;
-
-    finJuego ();
-
     // Evitamos otra tirada mientras se está animando
     botonTirada.disabled = true;
 
@@ -199,7 +194,6 @@ botonTirada.addEventListener("click", () => {
     mostrarDados();
 
     comprobarFinDeTirada();
-
 });
 
 
@@ -547,7 +541,10 @@ function finJuego () {
         {
             botonTirada.disabled = true;
             determinarPuntaje();
+
+			return;
         } }
+	 botonTirada.disabled = false;
 }
 
 
@@ -649,8 +646,8 @@ function animarTirada() {
             // Continuamos con la lógica del juego
             comprobarFinDeTirada();
 
-            // Volvemos a habilitar el botón
-            botonTirada.disabled = false;
+            // ¿Volvemos a habilitar el botón?
+            finJuego();
         }
 
     }, intervalo);
