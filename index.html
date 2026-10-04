@@ -131,8 +131,6 @@
         </div>
     </main>
 
-    <button id="btnPrueba">Hacer sonar</button>
-
 <script>
   // 1. Creamos el sonido.
   // "new Audio" crea un reproductor invisible y le dice qué archivo usar.
@@ -159,6 +157,49 @@
   });
 </script>
 
+<script>
+  // 1. Creamos el sonido, igual que antes.
+  const sonidoJugar = new Audio("sonidos/sonido_2.mp3");
+
+  // 2. Buscamos todos los botones que están dentro de un enlace.
+  const botonesJugar = document.querySelectorAll("a button");
+
+  // 3. Recorremos la lista: lo de adentro se aplica a cada botón.
+  botonesJugar.forEach(function (boton) {
+
+    // 4. Escuchamos el clic. Ahora la función recibe "evento",
+    // que es la información de lo que acaba de pasar (el clic).
+    boton.addEventListener("click", function (evento) {
+
+      // 5. preventDefault() frena el comportamiento automático del clic.
+      // En este caso, frena el cambio de página del enlace <a>.
+      evento.preventDefault();
+
+      // 6. "closest('a')" busca hacia afuera el enlace <a> que contiene
+      // a este botón. Lo necesitamos para saber a qué página ir.
+      const enlace = boton.closest("a");
+
+      // 7. Definimos qué hacer al terminar: ir a la página del enlace.
+      // "href" es la dirección guardada en el <a>.
+      function irAlJuego() {
+        window.location.href = enlace.href;
+      }
+
+      // 8. "ended" es el evento que ocurre cuando el sonido termina.
+      // { once: true } hace que este aviso se use una sola vez.
+      sonidoJugar.addEventListener("ended", irAlJuego, { once: true });
+
+      // 9. Seguro: si el archivo no carga (error), igual cambiamos de página
+      // para que el botón nunca quede "muerto".
+      sonidoJugar.addEventListener("error", irAlJuego, { once: true });
+
+      // 10. Volvemos el sonido al inicio y lo reproducimos.
+      sonidoJugar.currentTime = 0;
+      sonidoJugar.play();
+    });
+  });
+  
+</script>
 
     <footer>
         Trabajo Práctico de Informática 1 - Universidad Nacional de las Artes -
