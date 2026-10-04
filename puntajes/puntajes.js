@@ -1,53 +1,50 @@
-const parrafo = document.getElementById("puntajes");
-//equipo recupera los colores seleccionados x el usuario
-let equipo = JSON.parse(
-    localStorage.getItem("equipo")
-);
-
-// ahora recuperamos los datos de puntajes de los juegos
-let puntaDados = JSON.parse(
-    localStorage.getItem("puntaDados")
-)||[];
-let puntaPreguntas = JSON.parse(
-    localStorage.getItem("puntaPreguntas")
-)||[];
-let puntaCartas = JSON.parse(
-    localStorage.getItem("puntaCartas")
-)||[];
-
-
-let equipoMostrar = {
-    colores: [],
-    dados: [],
-    cartas: [],
-    pregu: []
-};
-// equipo.lenght es la cantidad de equipos o la cantidad de colores que tiene el equipo? cuidemos eso al cambiar el sriptInicio
-console.log(equipo)
-console.log(equipo.length)
-
-for (let i=0 ; i<equipo.length; i++){
-    equipoMostrar.colores[i]=equipo[i] ?? 0;
-    equipoMostrar.dados[i]=puntaDados[i] ?? 0;
-    equipoMostrar.cartas[i]=puntaCartas[i] ?? 0;
-    equipoMostrar.pregu[i]=puntaPreguntas[i] ?? 0;
+// ========================================
+// PÁGINA DE PUNTAJES — Tabla de posiciones
+// ========================================
+ 
+// Junta los récords de los tres juegos y arma una fila por cada equipo
+// que haya jugado al menos uno de ellos.
+function mostrarTablaEquipos() {
+  const puntaCartas = JSON.parse(localStorage.getItem("puntaCartas")) || {};
+  const puntaDados = JSON.parse(localStorage.getItem("puntaDados")) || {};
+  const puntaPreguntas = JSON.parse(localStorage.getItem("puntaPreguntas")) || {};
+ 
+  // Juntamos las claves de equipo de los tres juegos, sin repetir
+  const todasLasClaves = new Set([
+    ...Object.keys(puntaCartas),
+    ...Object.keys(puntaDados),
+    ...Object.keys(puntaPreguntas)
+  ]);
+ 
+  const cuerpoTabla = document.querySelector("#tabla-equipos tbody");
+  cuerpoTabla.innerHTML = "";
+ 
+  if (todasLasClaves.size === 0) {
+    cuerpoTabla.innerHTML = `<tr><td colspan="4">Todavía nadie jugó ningún juego.</td></tr>`;
+    return;
+  }
+ 
+  todasLasClaves.forEach(clave => {
+    const colores = JSON.parse(clave); // volvemos el string a array de colores
+ 
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${colores.join(", ")}</td>
+      <td>${puntaCartas[clave]?.puntaje ?? "-"}</td>
+      <td>${puntaDados[clave]?.puntaje ?? "-"}</td>
+      <td>${puntaPreguntas[clave]?.puntaje ?? "-"}</td>
+    `;
+    cuerpoTabla.appendChild(fila);
+  });
 }
-
-function reinaPuntajes() {
-    localStorage.clear();
-location.reload();
+ 
+mostrarTablaEquipos();
+ 
+// Borra todos los puntajes guardados (botón a agregar en el HTML si no está)
+function reiniciarPuntajes() {
+  localStorage.removeItem("puntaDados");
+  localStorage.removeItem("puntaPreguntas");
+  localStorage.removeItem("puntaCartas");
+  location.reload();
 }
-//agregar boton al html!
-// quizas tambien borrar algun puntaje en particular?
-// podria armarse un boton cuando ya este definido html y css
-/* declaracion de IA: CHAT GPT me sugirio no perder todos los datos, mejor usar
-function reinaPuntajes() {
-    localStorage.removeItem("puntaDados");
-    localStorage.removeItem("puntaPreguntas");
-    localStorage.removeItem("puntaCartas");
-
-    location.reload();
-} */ 
-
-
-parrafo.innerHTML = `PUNTAJE MAXIMO DADOS: ${equipoMostrar.dados[0]} ... PUNTAJE MAXIMO CARTAS: ${equipoMostrar.cartas[0]} ... PUNTAJE MAXIMO PREGUNTAS: ${equipoMostrar.pregu[0]}`
+ 
