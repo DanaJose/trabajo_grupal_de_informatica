@@ -531,7 +531,7 @@ function sumarPuntaje (cantidad) {
     if (puntajeActual>puntajeDadosMax){
         puntajeDadosMax = puntajeActual;
     }
-    texto.innerHTML =  `<h2> ${puntajeActual} </h2>`
+    texto.innerHTML =  `Tu puntaje actual es: <h2> ${puntajeActual} </h2> `
 }
 
 
@@ -586,3 +586,53 @@ weinst = false;
     textoInstrucciones.innerHTML = "";
 weinst = true;    
 }}
+
+//funcion animar tirada que simula los posibles valores de un dado en la mesa:
+// declaracion IA: le solicite a chat gpt que lograra mostrar distintos valores en un intervalo de tiempo
+// no funciono a la primera pero brindo una estructura realmente solida
+function animarTirada() {
+
+    const intervalo = 150; // velocidad del cambio
+    const cantidadCambios = 14;
+
+    let cambios = 0;
+
+    const animacion = setInterval(() => {
+
+        // Cambiamos visualmente los dados que no están seleccionados
+        for (let i = 0; i < limite; i++) {
+               
+            // Los mostramos inmediatamente
+
+
+            if (seleccionados[i] === false) {
+
+                const valorAleatorio =
+                    dado[Math.floor(Math.random() * dado.length)];
+
+                dadosHTML[i].innerHTML = valorAleatorio;
+            }
+        }
+
+        cambios++;
+
+        // Cuando termina la animación
+        if (cambios >= cantidadCambios) {
+
+            clearInterval(animacion);
+
+            // Acá hacemos la tirada REAL
+            tirarDados();
+
+            // Mostramos el resultado definitivo
+            mostrarDados();
+
+            // Continuamos con la lógica del juego
+            comprobarFinDeTirada();
+
+            // Volvemos a habilitar el botón
+            botonTirada.disabled = false;
+        }
+
+    }, intervalo);
+}
