@@ -175,6 +175,11 @@
       // En este caso, frena el cambio de página del enlace <a>.
       evento.preventDefault();
 
+      // Esta línea escribe un mensaje en la consola del navegador.
+      // Sirve para comprobar que el código realmente se está ejecutando
+      // cuando hacemos clic. No cambia nada de lo que ve el usuario.
+      console.log("El clic llegó a mi código");
+
       // 6. "closest('a')" busca hacia afuera el enlace <a> que contiene
       // a este botón. Lo necesitamos para saber a qué página ir.
       const enlace = boton.closest("a");
@@ -198,7 +203,7 @@
       sonidoJugar.play();
     });
   });
-  
+
 </script>
 
     <footer>
