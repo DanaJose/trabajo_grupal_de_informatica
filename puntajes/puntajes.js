@@ -47,4 +47,8 @@ function reiniciarPuntajes() {
   localStorage.removeItem("puntaCartas");
   location.reload();
 }
+
+// Agregue el boton que faltaba
  
+const btnReiniciarPuntajes = document.getElementById("btn-reiniciar-puntajes");
+btnReiniciarPuntajes.addEventListener("click", reiniciarPuntajes);
