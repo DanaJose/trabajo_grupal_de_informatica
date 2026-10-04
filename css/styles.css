@@ -299,7 +299,8 @@ footer {
  
 .btn-dificultad,
 #confirmar,
-.btn-instrucciones {
+.btn-instrucciones,
+#btn-reiniciar-puntajes {
     background: white;
     border: 3px solid black;
     border-radius: 30px;
@@ -308,14 +309,20 @@ footer {
     font-weight: bold;
     cursor: pointer;
 }
- 
+
 .btn-dificultad:hover,
 #confirmar:hover,
-.btn-instrucciones:hover {
+.btn-instrucciones:hover,
+#btn-reiniciar-puntajes:hover {
     background-color: #ffd54f;
     transform: scale(1.05);
 }
- 
+
+#btn-reiniciar-puntajes {
+    display: block;
+    margin: 20px auto;
+}
+
 .ilustracion-mario {
     max-width: 400px;
     height: auto;

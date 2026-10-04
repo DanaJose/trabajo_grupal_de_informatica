@@ -22,7 +22,7 @@
     </header>
       <h1>¡Felicitaciones has trabajado duro para llegar hasta acá!</h1>  
 
-      <p id="puntajes">Es momento en que veas tus puntajes</p>
+      <p id="mensaje">Es momento en que veas tus puntajes</p>
 
       <section id="tabla-puntajes">
   <h2>Tabla de posiciones</h2>
@@ -42,6 +42,41 @@
 </section>
 
 <button type="button" id="btn-reiniciar-puntajes">Reiniciar todos los puntajes</button>
+
+<script>
+  // 1. Creamos la música.
+  // La ruta empieza con "../" porque puntajes.html está DENTRO de la carpeta
+  // "puntajes", y "sonidos" está afuera, en la raíz del proyecto.
+  // "../" significa "subí una carpeta".
+  // Usé puntajes.mp3, pero podés cambiarlo por otro archivo de "sonidos".
+  const musicaPuntajes = new Audio("../sonidos/puntajes.mp3");
+
+  // 2. loop = true hace que vuelva a empezar al terminar.
+  // Si ese sonido es un efecto corto y no querés que se repita,
+  // cambiá true por false.
+  musicaPuntajes.loop = true;
+
+  // 3. Volumen de 0 (silencio) a 1 (máximo).
+  musicaPuntajes.volume = 0.3;
+
+  // 4. Esta función pone a sonar la música.
+  // La usamos como plan B si el navegador bloquea el primer intento.
+  function iniciarMusica() {
+    musicaPuntajes.play();
+  }
+
+  // 5. Primer intento: reproducir apenas carga la página.
+  // play() devuelve una "promesa": un aviso de si funcionó o no.
+  // ".catch" es lo que se ejecuta SI el navegador lo bloqueó.
+  musicaPuntajes.play().catch(function () {
+
+    // 6. Plan B: esperamos a que la persona haga clic o apriete una tecla,
+    // y recién ahí arrancamos la música.
+    // { once: true } hace que cada aviso se use una sola vez.
+    document.addEventListener("click", iniciarMusica, { once: true });
+    document.addEventListener("keydown", iniciarMusica, { once: true });
+  });
+</script>
 
 <footer>Trabajo Práctico de Informática 1 - Universidad Nacional de las Artes - Artes Multimediales</footer>
  
