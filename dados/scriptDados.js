@@ -518,6 +518,7 @@ function hacerCaerColumna(columna) {
 let puntajeActual = 0;
 let ronda = 0;
 let puntajeDadosMax = 0;
+// cantidad en sumar puntaje diferencia combinaciones de 3, 4 o 5 figuras iguales
 function sumarPuntaje (cantidad) {
     puntajeActual = puntajeActual + (cantidad * 5) * ronda;
     if (ronda===7) {
@@ -550,6 +551,7 @@ function finJuego () {
 
 function determinarPuntaje() {
   const equipo = JSON.parse(localStorage.getItem("equipo"));
+		  console.log("chequeando si funciona el storage:", equipo);
   if (!equipo) {
     console.log("No hay equipo elegido, no se guarda el puntaje.");
     return;
@@ -559,9 +561,9 @@ function determinarPuntaje() {
   const todosLosRecords = JSON.parse(localStorage.getItem("puntaDados")) || {};
   const recordAnterior = todosLosRecords[claveEquipo];
 
-  if (!recordAnterior || puntajeDadosMax > recordAnterior.puntaje) {
+  if (!recordAnterior || puntajeActual > recordAnterior.puntaje) {
     todosLosRecords[claveEquipo] = {
-      puntaje: puntajeDadosMax,
+      puntaje: puntajeActual,
       fecha: new Date().toLocaleDateString("es-AR")
     };
     localStorage.setItem("puntaDados", JSON.stringify(todosLosRecords));
