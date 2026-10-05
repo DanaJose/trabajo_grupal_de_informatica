@@ -9,13 +9,13 @@ Creado por:
 * Dana Jose Galindo
 * Laura Prada
 
-Descripción general del sitio
+Descripción general del sitio:
 Multijuegos es un sitio web interactivo creado para que los usuarios puedan elegir entre tres opciones de juegos diferentes.
 La página presenta tres juegos relacionados con personajes y elementos del universo de Mario Bros. Cada juego tiene una dinámica y reglas diferentes. El usuario puede seleccionar el juego que desea jugar y obtener un puntaje según su desempeño.
 Nuestro objetivo general fue crear un sitio donde haya  una experiencia de entretenimiento interactiva a través de diferentes juegos desarrollados para la web.
 
 Juego de dados
-El objetivo es combinar tres personajes iguales de forma horizontal o vertical para sumar puntos y hacerlos desaparecer. Al tirar los dados aparecen personajes de Mario Bros., que pueden cambiarse de posición y seleccionarse para conservarlos antes del segundo tiro. En el tercer tiro, los personajes caen al tablero y se van acumulando desde abajo. Si se supera el límite del tablero, el juego termina.
+El objetivo es combinar tres personajes iguales de forma horizontal o vertical para sumar puntos y liberar espacio del tablero. Al tirar los dados aparecen personajes de Mario Bros., que pueden cambiarse de posición y seleccionarse para conservarlos antes del segundo tiro. En el tercer tiro, los personajes caen al tablero y se van acumulando desde abajo. Si se supera el límite del tablero, el juego termina.
 
 
 Juego de cartas
@@ -38,7 +38,7 @@ El objetivo principal de esta ronda es encontrar a Mario antes de que se termine
 
 Juego de preguntas
 En este juego se realizan preguntas de manera aleatoria.
-Antes de comenzar, el jugador puede elegir el nivel de dificultad entre fail y difícil. Las preguntas se cosnstruyeron de manera manual y con el nombre de un personaje o dato que vincule a la API; la Api no podía realizar información más profunda sobre el juego por lo que se vinculo una cosntruida por los fans que genera dstos curiosos sobre el juego.
+Antes de comenzar, el jugador puede elegir el nivel de dificultad entre fácil y difícil. Las preguntas se construyeron de manera manual y con el nombre de un personaje o dato que vincule a la API; la API no podía realizar información más profunda sobre el juego por lo que se vinculo una construida por los fans que genera datos curiosos sobre el juego.
 Las preguntas se seleccionan de acuerdo con el nivel elegido. El jugador debe responder las y, al finalizar, se le asigna un puntaje según su desempeño.
 
 
@@ -58,7 +58,7 @@ Las principales funcionalidades del sitio son:
 * Sistema de puntaje.
 * Selección de personajes en el juego de dados.
 * Combinación de tres figuras iguales.
-* Desaparición de figuras al formar combinaciones.
+* Tablero dinámico al formar combinaciones.
 * Sistema de rondas en el juego de cartas.
 * Cartas con diferentes efectos.
 * Temporizador en las rondas del juego de cartas.
