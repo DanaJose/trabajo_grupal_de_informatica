@@ -1,14 +1,25 @@
+// ============================================================
+// ELEMENTOS DE LA PÁGINA
+// ============================================================
+
+// Buscamos en el HTML los elementos que vamos a necesitar y los guardamos en variables.
 let resultado = document.querySelector("#resultado");
 let puntajeFinal = document.querySelector("#puntajeFinal");
 let reiniciar = document.querySelector("#reiniciar");
 let mensaje = document.querySelector("#mensaje");
 let puntaCartas = 0;
 
+
+// ============================================================
+// GUARDAR EL PUNTAJE (para la tabla de puntajes)
+// ============================================================
+
 // Puntajes
 // Agregue esta parte para que tenga coincidencia con todos los demás juegos, probala y me decís
 // Te la dejo así de visible pa que sepas que hice este agregado
 
 function guardarPuntajeCartas() {
+  // Leemos el equipo que se eligió en index.html.
   const equipo = JSON.parse(localStorage.getItem("equipo"));
   if (!equipo) {
     console.log("No hay equipo elegido, no se guarda el puntaje.");
@@ -19,6 +30,7 @@ function guardarPuntajeCartas() {
   const todosLosRecords = JSON.parse(localStorage.getItem("puntaCartas")) || {};
   const recordAnterior = todosLosRecords[claveEquipo];
 
+  // Guardamos solo si es la primera partida del equipo o si superó su récord.
   if (!recordAnterior || puntaje > recordAnterior.puntaje) {
     todosLosRecords[claveEquipo] = {
       puntaje: puntaje,
@@ -31,7 +43,13 @@ function guardarPuntajeCartas() {
   }
 }
 
+// El botón de reiniciar arranca oculto; aparece cuando termina la partida.
 reiniciar.style.display = "none";
+
+
+// ============================================================
+// ESTADO DEL JUEGO
+// ============================================================
 
 let puntaje = 0;
 let tiempo = 20;
@@ -39,10 +57,12 @@ let mostrarTiempo = document.querySelector("#tiempo");
 
 let ronda = 1;
 
+// Cuando es true, las cartas dejan de responder a los clics.
 let juegoTerminado = false;
 
 let contenedorCartas = document.querySelector("#cartas");
 
+// Desordena una lista de cartas al azar.
 function mezclarCartas (elegirCartas){
 
     elegirCartas.sort(() => Math.random() - 0.5);
@@ -84,6 +104,10 @@ let cartasRonda2 = [
     "princesa"
 ];
 
+
+// ============================================================
+// CREAR LAS CARTAS
+// ============================================================
 
 function crearCartas(cartas) {
 mezclarCartas(cartas);
@@ -157,6 +181,10 @@ mezclarCartas(cartas);
                 puntajeFinal.innerText =
                     "Tu puntaje es " + puntaje + " puntos";
 
+                // NUEVO: guardamos el puntaje aunque haya perdido,
+                // para que aparezca en la tabla de puntajes.
+                guardarPuntajeCartas();
+
                 reiniciar.style.display = "block";
             }
 
@@ -192,6 +220,7 @@ mezclarCartas(cartas);
                 mostrarTiempo.innerText = tiempo;
 
 
+                // CRONÓMETRO DE 2da RONDA
                 cronometro = setInterval(function() {
 
                     tiempo--;
@@ -212,7 +241,7 @@ mezclarCartas(cartas);
                         puntajeFinal.innerText =
                             "Puntaje: " + puntaje + " puntos";
 
-                            // NUEVO: guardamos el puntaje al terminar el tiempo.
+                        // NUEVO: guardamos el puntaje al terminar el tiempo.
                         guardarPuntajeCartas();
 
                         reiniciar.style.display = "block";
@@ -281,7 +310,7 @@ mezclarCartas(cartas);
                 puntajeFinal.innerText =
                     "Tu puntaje es " + puntaje + " puntos";
 
-                // NUEVO: guardamos el puntaje al terminar el tiempo.
+                // Guardamos el puntaje al ganar, para el ranking.
                 guardarPuntajeCartas();
 
                 // Aparece reiniciar
@@ -295,6 +324,10 @@ mezclarCartas(cartas);
     });
 }
 
+
+// ============================================================
+// ARRANQUE DEL JUEGO
+// ============================================================
 
 // EMPIEZA LA RONDA 1
 crearCartas(cartasRonda1);
@@ -320,6 +353,9 @@ let cronometro = setInterval(function() {
 
         puntajeFinal.innerText =
             "Puntaje: " + puntaje + " puntos";
+
+        // NUEVO: guardamos el puntaje al terminar el tiempo de la ronda 1.
+        guardarPuntajeCartas();
 
         reiniciar.style.display = "block";
     }
