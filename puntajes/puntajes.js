@@ -62,5 +62,3 @@ function reiniciarPuntajes() {
 // const btnReiniciarPuntajes = document.getElementById("btn-reiniciar-puntajes");
 // btnReiniciarPuntajes.addEventListener("click", reiniciarPuntajes);
  
-const btnReiniciarPuntajes = document.getElementById("btn-reiniciar-puntajes");
-btnReiniciarPuntajes.addEventListener("click", reiniciarPuntajes);
