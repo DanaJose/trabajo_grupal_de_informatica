@@ -212,6 +212,9 @@ mezclarCartas(cartas);
                         puntajeFinal.innerText =
                             "Puntaje: " + puntaje + " puntos";
 
+                            // NUEVO: guardamos el puntaje al terminar el tiempo.
+                        guardarPuntajeCartas();
+
                         reiniciar.style.display = "block";
                     }
 
@@ -278,9 +281,7 @@ mezclarCartas(cartas);
                 puntajeFinal.innerText =
                     "Tu puntaje es " + puntaje + " puntos";
 
-                // lo llevamos al ranking 
-                // Acá también te agregue texto
-                                 
+                // NUEVO: guardamos el puntaje al terminar el tiempo.
                 guardarPuntajeCartas();
 
                 // Aparece reiniciar
