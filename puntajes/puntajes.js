@@ -58,6 +58,9 @@ function reiniciarPuntajes() {
 }
 
 // Agregue el boton que faltaba
+// Botón solo para desarrollo, comentado para la entrega final
+// const btnReiniciarPuntajes = document.getElementById("btn-reiniciar-puntajes");
+// btnReiniciarPuntajes.addEventListener("click", reiniciarPuntajes);
  
 const btnReiniciarPuntajes = document.getElementById("btn-reiniciar-puntajes");
 btnReiniciarPuntajes.addEventListener("click", reiniciarPuntajes);
