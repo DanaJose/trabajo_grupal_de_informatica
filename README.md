@@ -38,8 +38,8 @@ El objetivo principal de esta ronda es encontrar a Mario antes de que se termine
 
 Juego de preguntas
 En este juego se realizan preguntas de manera aleatoria.
-Antes de comenzar, el jugador puede elegir el nivel de dificultad entre fail y difícil. Se uso una api que hace que se generen informaciónnn de las respuestas correctas.
-Las preguntas se seleccionan de acuerdo con el nivel elegido. El jugador debe responderlas y, al finalizar, se le asigna un puntaje según su desempeño.
+Antes de comenzar, el jugador puede elegir el nivel de dificultad entre fail y difícil. Las preguntas se cosnstruyeron de manera manual y con el nombre de un personaje o dato que vincule a la API; la Api no podía realizar información más profunda sobre el juego por lo que se vinculo una cosntruida por los fans que genera dstos curiosos sobre el juego.
+Las preguntas se seleccionan de acuerdo con el nivel elegido. El jugador debe responder las y, al finalizar, se le asigna un puntaje según su desempeño.
 
 
 Para desarrollar el sitio se utilizaron:
@@ -68,9 +68,35 @@ Las principales funcionalidades del sitio son:
 
 API utilizada:
 
+1. Documentación general de la tecnología (MediaWiki API): https://www.mediawiki.org/wiki/API:Action_API
+2. La documentación: https://www.mariowiki.com/api.php?action=help&modules=query
+3. Las condiciones de uso / copyright de la wiki: MarioWiki:Copyrights
+
+La API de MediaWiki expuesta por mariowiki.com (una wiki de fans, no oficial de Nintendo), investigamos y antes había una pero cerro el año pasado, la información que obtenemos son extractos de texto de artículos de personajes/juegos de Mario (prop=extracts) se consulta mediante un fetch() con la URL armada dinámicamente según el personaje de la pregunta, usando origin=* para esquivar CORS; los datos fueron procesados parseando el JSON, navegan query.pages, extraen el campo extract, y se quedan con la primera línea como "dato curioso".
+
+Decisiones técnicas realizadas:
+
+- Verificación previa de endpoints: antes de integrar la API, se probó manualmente en la consola del navegador (fetch directo) para confirmar que respondía bien con origin=*, evitando descubrir el problema de CORS recién al integrarlo en el juego.
+  
+- Nombres de página verificados de antemano: cada personajeParaExtra se confirmó como título exacto existente en la wiki antes de usarlo, para no depender de búsquedas difusas (list=search) que devuelven resultados poco predecibles (ej. buscar "Bowser" trae también "Giant Bowser", "Dry Bowser", etc.).
+  
+- Caso especial — redirects: la página Power-up es en realidad un redirect hacia List of power-ups; se usó directamente el título de destino para evitar depender del parámetro redirects=1.
+      
+
 
 Declaración sobre el uso de IA
+
 chat gpt y cloude fueron las inteligencias artificiales que usamos  como herramientas de apoyo durante el desarrollo de Multijuegos. 
 Principalmente las usamos para ejercicios matemáticos de javascript, para consejos sobre la organización del sitio
 
 Las respuestas y propuestas obtenidas fueron revisadas por el grupo y, cuando era necesarios las descartabamos olas implementabamos teniendo en cuenta las necesidades del proyecto y las decisiones tomadas por los integrantes
+
+Etapas:
+
+- Dentro de la primera etapa se le pidio que nos hiciera un cronograma de organización con el tiempo para llegar a tiempo con las etapas.
+- A medida que fuimos trabajando, fuimos organizando algunas esrructuras de manera que fuer coherente y en mano con la consigna, por lo que a la mitad pedimos una evaluación
+- Como cada quien se fue encargando de un juego, se hicieron css individuales, lo que se le pidio a Claude que las inificara y diera buenas prácticas para el manejo de nombres en común que no chocaran, cosa que había ocurrido y por lo que fue de gran ayuda para localizar dichos errores y poder mantener una mejor organización
+- En la etapa de los puntajes fue de gran acompañante para pedirle mejores ideas de creación de js, de lo cual pudimos tomar ideas e ir de nuestra mano con consejos
+-  A la hora de construir los sonidos, el bando de sonidos fue descargado y colocado en una carpeta mp3, como un tema no tan claro se le pidio consejo y a partir de sus sugerencias se entendio el manejo para luego poder seguir construyendo de manera manual y con ayuda en momentos en que fue necesario
+-  Se revisaron que las estructuras del código estuvieran bien organizadas y sin código basura u interfiriendo, en lo que se encontraron llaves sin colocar o faltantes de algún signo en comentarios que perjudicaban a algún comando
+- Para el diseño de la página no se utilizo la IA y támpoco se le mostro para que nos de una retroalimentación final, la maquetación previa se hizo en CANVA para darnos una guía que fue util para tener claridad en pedidos exactos a la IA
